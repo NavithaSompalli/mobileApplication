@@ -1,0 +1,288 @@
+.home-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    border:1px solid #000;
+}
+
+::ng-deep .p-button-outlined.p-button-secondary {
+    border-color: #498fad;
+    border-radius: 20px;
+    color: #498fad;
+}
+
+:host ::ng-deep .app-form-container  {
+    width: '25rem';
+    overflow: 'hidden';
+    background-color: #000;
+    background-image: 'linear-gradient(#54afd6,#ffffff, #ffffff,#ffffff,#54afd6)' !important;
+    height:100vh !important;
+}
+
+.p-button-elements {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 50px;
+    width: 50px;
+    background-color: #498fad;
+    color: #ffffff;
+    position: relative;
+    left: 75%;
+    margin: 10px;
+}
+
+::ng-deep .p-button-outlined.p-button-secondary:not(:disabled):hover {
+    background-color: transparent;
+}
+
+::ng-deep .p-button-outlined.p-button-secondary {
+    border: none !important;
+}
+
+::ng-deep .p-button {
+    border: none;
+}
+
+::ng-deep .buttons-container .p-button {
+    color: #ffffff;
+    font-size: 30px;
+}
+
+::ng-deep .item-container {
+    width: 86%;
+    background-color: transparent;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 5px;
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .p-panel {
+    width: 21rem;
+}
+
+::ng-deep .p-button-elementschild {
+    border: 1px solid rgb(73, 143, 173);
+    border-radius: 50px;
+    width: 150px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+}
+
+::ng-deep .p-button-elementschild .p-button-label {
+    font-size: 1.2rem;
+    color: #498fad;
+    padding: 10px;
+}
+
+::ng-deep .p-button-elements .p-button-label {
+    color: #ffffff;
+}
+
+::ng-deep .items {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+::ng-deep .home-card-container {
+    display: flex;
+    flex-direction: column;
+    width: 22rem;
+    overflow: hidden;
+    height: 60vh;
+    flex-wrap: wrap;
+    scrollbar-width: 5px;
+}
+
+::ng-deep .task-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    overflow-y: auto;
+    margin-top: 10px;
+}
+
+::ng-deep .p-card {
+    padding: 0px;
+    margin: 5px;
+    margin-top: 15px;
+}
+
+.logo {
+    height: 80px;
+    width: 80px;
+    background-color: #e6e9ed;
+    padding: 10px;
+    border-radius: 5%;
+}
+
+.child-card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    height: 90vh;
+}
+
+.form-container1 {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.heading {
+    text-align: center;
+}
+
+input {
+    border-radius: 20px;
+}
+
+::ng-deep .p-button-outlined.p-button-secondary:not(:disabled):hover {
+    border-color: transparent !important;
+}
+
+::ng-deep .p-button-outlined.p-button-secondary:not(:disabled):active {
+    border-color: transparent !important;
+    background-color: transparent !important;
+}
+
+::ng-deep .p-button-outlined.p-button-secondary:not(:disabled):hover {
+    background-color: transparent !important;
+    border-color: none !important;
+
+}
+
+::ng-deep .p-button-secondary:focus-visible,
+.p-button-secondary:focus-visible {
+    border-color: transparent !important;
+}
+
+::ng-deep .p-button-secondary:focus-visible {
+    outline-color: transparent !important;
+}
+
+.buttons-container2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+::ng-deep .p-card {
+    width: 23rem;
+}
+
+.item-container3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-element {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+::ng-deep .p-card-body {
+    padding: 5px !important;
+}
+
+.app-permission {
+    margin-left: 12rem;
+    font-size: 10px;
+}
+
+.hourDropdown {
+    height: 40px;
+}
+
+.custom-upload-btn {
+    border: 1px solid #cbd5e1;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #f8fafc;
+    padding-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.hoursList {
+    margin-bottom: 10px;
+    width: 20%;
+}
+
+::ng-deep .p-panel-toggleable .p-panel-header {
+    padding: 3px;
+}
+
+
+
+
+.responsive-table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+th,
+td {
+    padding: 5px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+
+::ng-deep .hour-input .p-inputnumber-input {
+    width: 60px;
+    /* adjust as needed */
+    text-align: center;
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
+.error-text {
+    color: red;
+    font-family: "Roboto";
+}
+
+
+@media (max-width:576px) {
+    ::ng-deep .form-card-container .p-card {
+        width: '19rem' !important;
+        overflow: 'hidden' !important;
+        background-image: 'linear-gradient(#54afd6,#ffffff, #ffffff,#ffffff)' !important;
+    }
+
+    .child-card-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        overflow: hidden;
+        height: 90vh;
+        width: 99% 531.625px;
+        padding: 10px;
+        margin: 10px;
+        
+    }
+}

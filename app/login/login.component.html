@@ -1,0 +1,64 @@
+<div class="card-containerlogin">
+    <p-card [style]="{ width: '25rem', overflow: 'hidden'}" *ngIf="userType === ''">
+        <ng-template #header>
+            <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" [ngStyle]="{'height':'60vh'}"/>
+        </ng-template>
+        <p [ngStyle]="{'margin':'10px'}"> Family App Permission </p>
+      
+        <p [ngStyle]="{'margin':'10px'}">
+            Manage What your child can access and control in the app 
+        </p>
+        <ng-template #footer>
+            <div class="flex gap-4 buttons-container">
+                <p-button label="Parent" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
+                    [ngStyle]="{'border': '1px solid #498fad', 'border-radius':'20px'}" class="p-button-elementslogin"
+                    (click)="onSelectUserType('parent')" />
+                <p-button label="Child" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
+                    [ngStyle]="{'border': '1px solid #498fad', 'border-radius':'20px'}" class="p-button-elementslogin"
+                    (click)="onSelectUserType('child')" />
+            </div>
+        </ng-template>
+    </p-card>
+    <p-card
+        [style]="{ 
+        width: '25rem', 
+        overflow: 'hidden', 
+        backgroundImage: 'linear-gradient(#54afd6,#ffffff, #ffffff,#ffffff)', display:'flex', justifyContent:'flex-end' }"
+        *ngIf="userType !== ''" class="parent-login">
+        <h1 class="parent-login-heading">Parent-Child App Permissions</h1>
+        <img src="https://static.vecteezy.com/system/resources/previews/003/689/231/original/online-registration-or-sign-up-login-for-account-on-smartphone-app-user-interface-with-secure-password-mobile-application-for-ui-web-banner-access-cartoon-people-illustration-vector.jpg"
+            class="loginpage-iamge" />
+        <form class="form-container" (ngSubmit)="onSubmitLogin()" #login="ngForm">
+            <h1>Login</h1>
+            <input type="text" pInputText [(ngModel)]="username" variant="filled" name="emailId" placeholder="Username" />
+            <input type="text" pInputText [(ngModel)]="password" variant="filled" name="passwords"
+                placeholder="Password" />
+            <p-button type="submit" label="Login" class="login-btn" />
+        </form>
+    </p-card>
+
+    <div class="card flex justify-center">
+        <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
+            [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" />
+    </div>
+
+    <!-- <p-card [style]="{ width: '25rem', overflow: 'hidden' }" *ngIf="userType === 'child'">
+        <ng-template #icon>  <i class="fa-solid fa-arrow-left"></i></ng-template>
+        <ng-template #header>
+            <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+        </ng-template>
+        <ng-template #title>Child </ng-template>
+        <ng-template #subtitle> Child app management </ng-template>
+        <p>
+            Welcome to TutorLock. Please select user type... Lorem ipsum dolor amet, consectetur, adipiscing elit.
+        </p>
+        <ng-template #footer>
+            <div class="flex gap-4 buttons-container">
+                <p-button label="Parent" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
+                    class="p-button-elements" (click)="onSelectUserType('parent')" />
+                <p-button label="Child" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
+                    class="p-button-elements" (click)="onSelectUserType('child')" />
+            </div>
+        </ng-template>
+    </p-card>
+</div> -->

@@ -1,0 +1,65 @@
+<div class="home-container">
+    <p-card [ngStyle]="{'margin':'5px'}"
+      class="form-card-container"
+        *ngIf="addType==='child'">
+        <div class="child-card-container">
+            <h1 class="heading">Create Child</h1>
+            <p class="heading">Please fill in the details</p>
+            <form class="form-container1" (ngSubmit)="onCreateChild()" #createChild="ngForm">
+                <input type="text" pInputText [(ngModel)]="name" variant="filled" name="name" placeholder="Name" required #names="ngModel"/>
+                <span *ngIf="names.invalid && names.touched" class="error-text"> Name is
+                                required</span>
+                <input type="text" pInputText [(ngModel)]="dob" variant="filled" name="dateOfBirth"
+                    placeholder="Date Of Birth" required #dobs="ngModel"/>
+                  <span *ngIf="dobs.invalid && dobs.touched" class="error-text">Date Of Birth is
+                                required</span>
+                <input type="text" pInputText [(ngModel)]="username" variant="filled" name="username"
+                    placeholder="Username"  required #usernames = "ngModel"/>
+                 <span *ngIf="usernames.invalid && usernames.touched" class="error-text">Username is
+                                required</span>
+                <input type="text" pInputText [(ngModel)]="password" variant="filled" name="password"
+                    placeholder="Password" required #passwords="ngModel"/>
+                 <span *ngIf="passwords.invalid && passwords.touched" class="error-text">Password Name is
+                                required</span>
+                <div class="flex gap-4 buttons-container2">
+                    <p-button type="submit" label="Create" severity="secondary" class="p-button-elementschild"
+                        [outlined]="true" 
+                        [ngStyle]="{'border': '1px solid #498fad', 'border-radius':'20px', 'padding':'10px'}" />
+                    <p-button label="Discard" severity="secondary" [outlined]="true" styleClass="w-full"
+                        [ngStyle]="{'border': '1px solid #498fad', 'border-radius':'20px','padding':'10px'}"
+                        class="p-button-elementschild" (click)="onClickDiscard()" />
+                </div>
+            </form>
+        </div>
+    </p-card>
+    <p-card
+       class="app-form-container" [ngStyle]="{'margin':'5px','margin-top':'30px'}"
+        *ngIf="addType==='app'">
+        <div class="child-card-container">
+            <h1 class="heading">Create App</h1>
+            <p class="heading">Please fill in the details</p>
+            <form class="form-container1" (ngSubmit)="onCreateApp()" #createApp="ngForm">
+                <input type="text" pInputText [(ngModel)]="Appname" variant="filled" name="appname"
+                    placeholder="App Name" required #appname = "ngModel"/>
+                <span *ngIf="appname.invalid && appname.touched" class="error-text">App Name is
+                                required</span>
+                <input type="text" pInputText [(ngModel)]="website" variant="filled" name="website"
+                    placeholder="Website Name" required #websites = "ngModel"/>
+                <span *ngIf="websites.invalid && websites.touched" class="error-text">Website Name is
+                                required</span>
+                
+                <label for="uploadFile" class="custom-upload-btn">
+                    Upload Image
+                </label>
+                <input type="file" id="uploadFile" (change)="onFileSelected($event)" accept="image/png, image/jpeg"
+                    hidden name="image" required/>
+                <div class="flex gap-4 buttons-container2">
+                    <p-button type="submit" label="Create" severity="secondary" class="w-full p-button-elementschild"
+                        [outlined]="true" styleClass="w-full" />
+                    <p-button label="Discard" severity="secondary" class="w-full p-button-elementschild"
+                        [outlined]="true" styleClass="w-full" (click)="onClickDiscard()" />
+                </div>
+            </form>
+        </div>
+    </p-card>
+</div>

@@ -1,0 +1,55 @@
+<div class="child-app">
+  <div class="child-app1">
+    <!-- Header -->
+    <div class="header flex justify-between mb-4 align-items-center">
+      <div class="profile flex align-items-center gap-3">
+        <div class="avatar">👦</div>
+        <h1 class="m-0">Hi, {{ userList?.name }}</h1> <!-- Safe access -->
+      </div>
+      <div class="time-circle" (click)="onLogout()">
+        <i class="fa-solid fa-power-off"></i>
+      </div>
+    </div>
+
+    <!-- App Cards -->
+    <div class="grid app-grid mb-5">
+      <div class="col-6" *ngFor="let app of apps; let index = index">
+        <p-card
+          *ngIf="app?.enabled"
+          [class.disabled]="app.disabled"
+          class="app-card"
+        >
+          <div class="app-icon" (click)="onPlay(app, app.website, index)">
+            <img
+              [src]="app?.url"
+              alt="App Icon"
+              class="image-app-logo"
+            />
+          </div>
+          <h3
+            *ngIf="app['name']"
+            [ngStyle]="{ 'text-align': 'center' }"
+          >
+            {{ app.name }}
+          </h3>
+
+          <!-- Optional: Uncomment this block if you want a button instead of clickable icons
+          <a [href]="app.website" target="_blank">
+            <button
+              pButton
+              label="{{ app.disabled ? 'TIME UP!' : 'Play' }}"
+              [disabled]="app.disabled"
+              class="play-button mt-2"
+            ></button>
+          </a>
+          -->
+         
+        </p-card>
+
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+

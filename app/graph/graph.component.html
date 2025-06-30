@@ -1,0 +1,33 @@
+<div class="card">
+    <p-chart type="line" [data]="data" [options]="options" class="h-[25rem] custom-chart canvas" />
+</div>
+<p>Activity History</p>
+
+<p-panel class="activity-container">
+    <ng-container *ngIf="usersList.length !== 0">
+        <div *ngFor="let item of usersList">
+            <div *ngIf="item['usertype'] === 'child'" class="child-info">
+                <p>{{item["name"]}}</p>
+                <p>Total Hours: {{item['totalHours']}}</p>
+                <!--<p>Total Used Time : {{+(item['totalUsedTime']/60).toFixed(2)}}</p>-->
+               <p>Total Used Time: {{ item['totalUsedTime'] | minutesToHours }}</p>
+                 <ng-container *ngFor="let value of item['apps']"> 
+                    <div class="apps-image" *ngIf="value['enabled']">
+                        <img [src]="value.url" class="app-img"/> 
+                        <p>{{value['name']}}</p>
+                        <p>{{value['usedTime'] = value['usedTime'] || 0 | minutesToHours }}</p>
+                    </div>
+                   </ng-container>
+            </div>
+            <!-- <div class="card flex justify-center">
+                <p-panel header="Header" [toggleable]="true" >
+                   <ng-container *ngFor="let value of item['apps']"> 
+                    <div>
+                        <img [src]="value.url"/> 
+                    </div>
+                   </ng-container>
+                </p-panel>
+            </div> -->
+        </div>
+    </ng-container>
+</p-panel>

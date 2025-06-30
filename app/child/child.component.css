@@ -1,0 +1,160 @@
+.child-app {
+  border-radius: 10px;
+  margin: 30px auto 5px;
+  background-color: transparent;
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.child-app1 {
+  border-radius: 10px;
+  background-color: #498fad;
+  width: 23rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 95vh;
+}
+
+.avatar,
+.image-app-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #d4e3ff;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #3a86ff;
+}
+
+.time-circle {
+  background: #3a86ff;
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-card.disabled {
+  opacity: 0.7;
+  filter: grayscale(30%);
+}
+
+.app-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.progress-container {
+  height: 6px;
+  background: #e0e7ff;
+  border-radius: 3px;
+  margin: 12px 0;
+}
+
+.progress {
+  height: 100%;
+  background: #3a86ff;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.play-button {
+  width: 100%;
+  background: #3a86ff !important;
+  color: white;
+  border: none;
+}
+
+.play-button:disabled {
+  background: #ccc !important;
+  cursor: not-allowed;
+}
+
+.request-button {
+  width: 100%;
+  background: #ff5a5f !important;
+  border: none;
+  color: white;
+  font-weight: bold;
+}
+
+.time-warning {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  overflow-y: auto;
+  height: 60vh;
+  scrollbar-width: none;
+}
+
+.align-items-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: burlywood;
+  border-radius: 10px 10px 0 0;
+  padding: 5px;
+  width: 23rem;
+}
+
+.footer {
+  width: 23rem;
+}
+
+/* 📱 Small screens (mobile) */
+@media (max-width: 576px) {
+  .child-app,
+  .child-app1,
+  .align-items-center,
+  .footer {
+    width: 19rem;
+  }
+
+  .child-app {
+  border-radius: 10px;
+  margin: 30px auto 5px;
+  background-color: transparent;
+  width: 19rem;
+  display: block;
+  margin:5px;
+}
+.child-app1{
+  height:97vh;
+  margin-top: 5px;
+}
+
+  .avatar,
+  .image-app-logo {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .time-circle {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+}

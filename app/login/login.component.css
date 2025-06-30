@@ -1,0 +1,118 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.card-containerlogin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+::ng-deep .p-button-outlined.p-button-secondary {
+  border-color: #498fad !important;
+  width: 150px !important;
+  border-radius: 20px !important;
+  color: #498fad;
+}
+
+::ng-deep .loginpage-iamge {
+  align-self: center;
+  height: 300px;
+  width: 23rem;
+  border-radius: 50%;
+  margin-left:5%;
+  margin-top:20px;
+  margin-bottom: 20px;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+
+::ng-deep .active {
+  background-color: #498fad;
+  color: #ffffff !important;
+  border-radius: 20px;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  height: 35vh;
+  width: 100%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  padding: 15px;
+}
+
+::ng-deep .p-card-body {
+  padding: 0px !important;
+}
+
+::ng-deep .p-button {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+:host ::ng-deep .login-btn {
+  background-color: #498fad !important;
+  color: white !important;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-radius: 20px;
+}
+
+input {
+  height: 40px;
+  width: 100%;
+  margin: 5px;
+  padding-left: 5px;
+}
+
+.parent-login-heading {
+  align-self: flex-start;
+  text-align: center;
+  font-family: "Roboto";
+  font-size: 28px;
+  margin-top: 30px;
+}
+
+.w-full {
+    width: 100% !important;
+}
+
+@media (max-width:678px) {
+  .card-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    margin: 10%;
+  }
+
+  input {
+  padding:10px;
+  width: 100%;
+  margin: 5px;
+  border-radius: 20px;
+  
+}
+
+
+}

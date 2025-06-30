@@ -1,0 +1,88 @@
+<div class="home-card-container">
+    <p-card class="panel-bg-container">
+        <div class="sidebar-container" *ngIf="isToggleActive">
+            <p-button type="button" (click)="onSelectedTab('app')" class="tabs-btn">Apps</p-button>
+            <p-button type="button" (click)="onSelectedTab('child')" class="tabs-btn">Childs</p-button>
+            <p-button type="button" (click)="onSelectedTab('report')" class="tabs-btn">Report</p-button>
+        </div>
+        <nav class="nav-container">
+            <p>
+                <i class="fa-solid fa-bars" [ngStyle]="{'font-size':'28px','cursor':'pointer'}"
+                    (click)="onToggleButton()"></i>
+            </p>
+            <p (click)="onLogout()">
+                <i class="fa-solid fa-power-off" [ngStyle]="{'font-size':'28px','cursor':'pointer'}"></i>
+            </p>
+        </nav>
+        <div class="main-content-container" *ngIf = "tabType !== 'report'">
+            <div class="tabs-content-container">
+                <ng-container *ngFor="let item of filteredList; let i = index">
+                    <img [src]="item?.url" class="logo" *ngIf="item?.usertype === 'app'" />
+                    <div class="child-content-parent-container" *ngIf="item?.usertype !== 'app'">
+                        <div class="items-container">
+                            <p class="items"><strong>{{ item?.name }}</strong></p>
+                            <hr />
+                            <p class="items"><strong>Date Of Birth &nbsp;:</strong> <span>&nbsp;&nbsp;{{
+                                    item?.dateOfBirth
+                                    }}</span></p>
+                            <p class="items"><strong>Username &nbsp;:</strong> <span>&nbsp;&nbsp;{{ item?.username
+                                    }}</span>
+                            </p>
+                            <p class="items"><strong>Password &nbsp; :</strong> <span>&nbsp;&nbsp;{{ item?.password
+                                    }}</span></p>
+                            <div class="card flex justify-center" *ngIf="permissionAppsList?.length !== undefined">
+                                <p-panel header="App Permission" [toggleable]="true"
+                                    [(collapsed)]="item.isPanelCollapsed"
+                                    [ngStyle]="{'overflow-y':'auto', 'display':'flex', 'gap':'10px', 'width':'25rem'}"
+                                    (collapsedChange)="onPanelToggle(item.id, 'appPermission')">
+                                    <ng-container>
+                                        <table style="width:100%; border-collapse: collapse;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Logo</th>
+                                                    <th>App Name</th>
+                                                    <th>Max Time</th>
+                                                    <th>Enable</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let obj of item['apps']">
+                                                    <td>
+                                                        <img *ngIf="obj?.url" [src]="obj.url" [alt]="obj.name"
+                                                            width="32" height="32" />
+                                                    </td>
+                                                    <td>{{ obj.name }}</td>
+                                                    <td>
+                                                        <p-inputNumber [(ngModel)]="obj.hour" [min]="0" [max]="24"
+                                                            buttonLayout="horizontal" placeholder="Hour"
+                                                            name="hour-{{obj.id}}" class="hour-input">
+                                                        </p-inputNumber>
+                                                    </td>
+                                                    <td>
+                                                        <p-toggleswitch [(ngModel)]="obj.enabled"
+                                                            (onChange)="onAppToggleChange(obj, item)" />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </ng-container>
+                                </p-panel>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+        <p-button label="+" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
+            [ngStyle]="{'border': '1px solid #498fad', 'border-radius':'50%'}" class="p-button-elements"
+            (click)="onSelectUserType('child')" *ngIf="tabType=== 'child'" />
+        <p-button label="+" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
+            [ngStyle]="{'border': '1px solid #498fad', 'border-radius':'50%'}" class="p-button-elements"
+            (click)="onSelectUserType('app')" *ngIf="tabType=== 'app'" />
+
+        <app-graph *ngIf="tabType === 'report'"></app-graph>
+           
+    </p-card>
+</div>
+
+ 
