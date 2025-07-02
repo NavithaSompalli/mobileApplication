@@ -27,27 +27,28 @@ export class GraphComponent implements OnInit {
                     let totalUsedTime = 0;
                     value["apps"].forEach(item => {
                         if (item['hour'] !== undefined) {
-                            totalHours = totalHours + item['hour'];
+                            totalHours = totalHours + Number(item['hour']);
+                           // console.log(typeof item['hour'])
                         }
 
                         if (item['usedTime'] !== undefined) {
                             totalUsedTime = totalUsedTime + item['usedTime'];
-                            console.log(totalUsedTime);
+                           // console.log(totalUsedTime);
                         }
                     });
                     value["totalHours"] = totalHours;
                     value["totalUsedTime"] = totalUsedTime;
-                    console.log("total", value['totalUsedTime'])
-                     console.log(this.usersList);
+                   // console.log("total", value['totalUsedTime'])
+                   // console.log(this.usersList);
                 });
                 this.initChart(); // Move inside callback to ensure chart initializes after data fetch
             },
             error: (err) => {
-                console.error('Failed to fetch users:', err);
+               // console.error('Failed to fetch users:', err);
             }
         });
 
-       
+
     }
 
     initChart() {
@@ -61,13 +62,18 @@ export class GraphComponent implements OnInit {
                 labels: this.usersList.map(user => user.name || 'Unnamed'),
                 datasets: [
                     {
-                        label: 'Used Time (hrs)',
+                        label: 'Total Used Time (Minutes)',
                         fill: false,
                         borderColor: documentStyle.getPropertyValue('--p-cyan-500'),
                         backgroundColor: documentStyle.getPropertyValue('--p-cyan-300'),
                         yAxisID: 'y',
                         tension: 0.4,
-                        data: this.usersList.map(user => +(user.totalUsedTime / 60).toFixed(2)) // Decimal hours
+                        data: this.usersList.map(user =>
+                            user.totalUsedTime < 60
+                                ? user.totalUsedTime
+                                : +(user.totalUsedTime / 60).toFixed(2)
+                        )
+                        // Decimal hours
                     }
                 ]
             };

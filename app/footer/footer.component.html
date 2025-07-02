@@ -1,9 +1,19 @@
 <div class="mb-2 video-details-container">
     <p-card class="video-container">
+         <nav class="nav-container">
+            <p (click) = "onGoBack()">
+                <i class="fa-solid fa-arrow-left" [ngStyle]="{'font-size':'28px','cursor':'pointer'}" ></i>
+            </p>
+            <p>
+                <i class="fa-solid fa-power-off" [ngStyle]="{'font-size':'28px','cursor':'pointer'}" (click) = "onLogout()"></i>
+            </p>
+        </nav>
+        <div>
         <iframe width="280" height="260" src="https://www.google.com/webhp?igu=1" title="YouTube video player"
             frameborder="0" class="iframe-element"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen class="child-app1">
         </iframe>
+        </div>
     </p-card>
 </div>

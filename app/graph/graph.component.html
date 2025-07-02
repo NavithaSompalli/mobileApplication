@@ -10,14 +10,19 @@
                 <p>{{item["name"]}}</p>
                 <p>Total Hours: {{item['totalHours']}}</p>
                 <!--<p>Total Used Time : {{+(item['totalUsedTime']/60).toFixed(2)}}</p>-->
-               <p>Total Used Time: {{ item['totalUsedTime'] | minutesToHours }}</p>
-                 <ng-container *ngFor="let value of item['apps']"> 
-                    <div class="apps-image" *ngIf="value['enabled']">
-                        <img [src]="value.url" class="app-img"/> 
-                        <p>{{value['name']}}</p>
-                        <p>{{value['usedTime'] = value['usedTime'] || 0 | minutesToHours }}</p>
+                <p>Total Used Time: {{ item['totalUsedTime'] | minutesToHours }}</p>
+                <ng-container *ngIf="item['totalHours'] !== 0">
+                    <div
+                        [ngStyle]="{'background-color':'#ffffff','padding':'5px','border-radius':'5px', 'color':'#000'}">
+                        <ng-container *ngFor="let value of item['apps']">
+                            <div class="apps-image" *ngIf="value['enabled']">
+                                <img [src]="value.url" class="app-img" />
+                                <p>{{value['name']}}</p>
+                                <p>{{value['usedTime'] = value['usedTime'] || 0 | minutesToHours }}</p>
+                            </div>
+                        </ng-container>
                     </div>
-                   </ng-container>
+                </ng-container>
             </div>
             <!-- <div class="card flex justify-center">
                 <p-panel header="Header" [toggleable]="true" >

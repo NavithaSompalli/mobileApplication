@@ -7,6 +7,7 @@ import Aura from '@primeng/themes/aura';
 //Components
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 
 //Modules 
@@ -38,7 +39,9 @@ import { FormComponent } from './form/form.component';
 import { AuthGuard } from './auth-guard.guard';
 import { GraphComponent } from './graph/graph.component';
 import { MinutesToHoursPipe } from './minutes-to-hours.pipe';
-
+import { HoverDeleteDirective } from './hover-delete-directive.directive';
+import { PopoverModule } from 'primeng/popover';
+import { DrawerModule } from 'primeng/drawer';
 
 
 // Routers link array 
@@ -51,7 +54,7 @@ import { MinutesToHoursPipe } from './minutes-to-hours.pipe';
  ]
 
 @NgModule({
-  declarations: [AppComponent,LoginComponent,HomeComponent,ChildComponent,FooterComponent,FormComponent,GraphComponent,MinutesToHoursPipe],
+  declarations: [AppComponent,LoginComponent,HomeComponent,ChildComponent,FooterComponent,FormComponent,GraphComponent,MinutesToHoursPipe,HoverDeleteDirective],
   bootstrap:[AppComponent],
   imports: [
     RouterModule.forRoot(routes),
@@ -71,7 +74,10 @@ import { MinutesToHoursPipe } from './minutes-to-hours.pipe';
     ToggleSwitchModule,
     InputNumberModule,
     ChartModule,
-    ProgressBarModule
+    ProgressBarModule,
+    ProgressSpinnerModule,
+    PopoverModule,
+    DrawerModule
   ],
   providers:[provideAnimationsAsync(),providePrimeNG({theme :{preset :Aura}}),MessageService],
   exports:[RouterModule,MinutesToHoursPipe]

@@ -1,33 +1,44 @@
-
-import { Component, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
-import { ServiceService } from '../service.service';
+import { MessageService } from 'primeng/api'; // For displaying toast messages
+import { ServiceService } from '../service.service'; // Custom service for login and state sharing
 
-
-
+// Angular component configuration
 @Component({
    selector: 'app-login',
    templateUrl: './login.component.html',
    styleUrl: './login.component.css',
    standalone: false
 })
-export class LoginComponent {
-   userType: string = "";
-   username: string = "";
-   password: string = "";
-   visible: boolean = false;
+export class LoginComponent implements OnInit{
+   userType: string = "";        // Stores selected user type ('parent' or 'child')
+   username: string = "";        // Stores the entered username
+   password: string = "";        // Stores the entered password
+   visible: boolean = false;     // May control visibility of a password input or modal
 
-   constructor(private router: Router, private message: MessageService, private service: ServiceService) { }
+   constructor(
+      private router: Router,                 // For navigation between routes
+      private message: MessageService,       // To show messages (toasts)
+      private service: ServiceService        // Service for authentication and user data management
+   ) { }
 
-
+   // Called when user selects a user type from a dropdown or similar control
    onSelectUserType(value: string) {
       this.userType = value;
-      console.log(this.userType)
+      console.log(this.userType); // For debugging
    }
 
-   // Submit function
+   ngOnInit(){
+      if( localStorage.getItem('userType') === 'parent'){
+         this.router.navigate(['home'])
+      }else if(localStorage.getItem('userType') === 'child'){
+         this.router.navigate(['child']);
+      }
+   }
+
+   // Called when user submits the login form
    onSubmitLogin() {
+      // Basic client-side validation for empty fields
       if (!this.username || !this.password) {
          let message = '';
 
@@ -39,39 +50,51 @@ export class LoginComponent {
             message = 'Please fill the password field';
          }
 
+         // Show error message using PrimeNG's message service
          this.message.add({ severity: 'error', detail: message, life: 3000 });
          return;
       }
 
+      // Only proceed if the userType is either 'parent' or 'child'
       if (this.userType === 'parent' || this.userType === 'child') {
+         // Call the login method from the service
          this.service.login(this.username, this.password).subscribe({
             next: (users) => {
-              // console.log("login", users);
-              console.log(users);
+               console.log(users); // For debugging
+
+               // Find a matching user in the returned user list
                const foundUser = users.find(user =>
                   user.username === this.username && user.password === this.password
                );
+
+               // If a parent logs in successfully
                if (foundUser && this.userType === 'parent') {
+                  localStorage.setItem('authToken', 'true'); // Save auth flag
+                  localStorage.setItem('userType', 'parent');
+                  this.router.navigate(['home']);            // Navigate to parent home page
+                  this.service.updateUser(users);            // Possibly update shared user state
+               }
+               // If a child logs in successfully
+               else if (foundUser && this.userType === "child") {
                   localStorage.setItem('authToken', 'true');
-                  this.router.navigate(['home']);
-                  this.service.updateUser(users);
-               } else if (foundUser && this.userType === "child") {
-                  localStorage.setItem('authToken', 'true');
-                  localStorage.setItem('userId', foundUser.id)
-                  console.log(foundUser.id);
-                  this.service.updateUser(foundUser);
-                  //   localStorage.clear();
-                  //  localStorage.setItem("foundUser", JSON.stringify(foundUser));
-                  this.router.navigate(['child']);
-               } else {
+                  localStorage.setItem('userId', foundUser.id); // Store child's ID separately
+                  localStorage.setItem('userType', 'child');
+                  console.log(foundUser.id);                   // Debugging log
+                  this.service.updateUser(foundUser);          // Update state with single user
+                  this.router.navigate(['child']);             // Navigate to child's view
+               }
+               // No match found: invalid credentials
+               else {
                   this.message.add({ severity: 'error', detail: 'Invalid credentials', life: 3000 });
                }
             },
             error: () => {
+               // Handle any backend or HTTP error
                this.message.add({ severity: 'error', detail: 'Server error', life: 3000 });
             }
          });
       } else {
+         // If user type wasn't selected, prompt the user
          this.message.add({ severity: 'warn', detail: 'Please select a valid user type', life: 3000 });
       }
    }

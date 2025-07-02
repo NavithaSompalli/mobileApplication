@@ -1,6 +1,5 @@
   .home-card-container {
       height: 100vh;
-      border: 1px solid #000;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -98,7 +97,7 @@
   }
 
   .items-container {
-      background-color: #8fc0cc;
+      background-color: #f0f4f8;
       border-radius: 5px;
       padding: 10px;
       font-size: 15px;
@@ -106,6 +105,18 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+  }
+
+  .header-element {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .fa-trash-arrow-up{
+    color: steelblue;
+    font-size:18px;
   }
 
   ::ng-deep .panel-info .p-panel {
@@ -181,6 +192,51 @@
       margin: 10px;
       bottom: 20%;
   }
+
+  .app-logo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.uninstall-popup {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.uninstall-popup button {
+  background-color: #e53935;
+  color: white;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.popover-btn{
+    background-color: transparent;
+    border: none;
+}
+
+:host ::ng-deep .p-popover-content {
+    padding: var(--p-popover-content-padding);
+    background-color: #6daad3 !important;
+    border-radius: 5px !important;
+    font-family: 'Roboto' !important;
+}
+
+.popover-btn {
+    background-color: transparent;
+    border: none;
+    color: #000 !important;
+    font-weight: bold !important;
+}
+
 
   @media (max-width:576px) {
       ::ng-deep .panel-bg-container .p-card {

@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
   styleUrl: './form.component.css',
   standalone: false
 })
-export class FormComponent{
+export class FormComponent {
   @ViewChild('createApp') createApp?: NgForm;
   @ViewChild('createChild') createChild?: NgForm;
   name: string = "";
@@ -26,7 +26,7 @@ export class FormComponent{
   imageUrl?: string;
   addType: string;
   appAndUsersList: any[] = [];
- 
+
 
   constructor(private service: ServiceService, private message: MessageService, private router: Router) { }
 
@@ -39,42 +39,65 @@ export class FormComponent{
   }
 
   onCreateApp() {
-    let user = {
-      name: this.createApp?.controls['appname'].value,
-      url: this.imageUrl,
-      website: this.createApp?.controls['website'].value,
-      usertype: this.addType,
-      hour: '',
-      enabled: false,
-      usedTime: Date
-    }
-
-    this.service.onCreateUser(user).subscribe({
-      next: (response) => console.log(response)
-    })
+    const appName = this.createApp?.controls['appname'].value;
 
     this.service.onGetUsers().subscribe({
-      next: (response) => {
-        response.forEach(item => {
-          if (item.usertype === 'child') {
-            item['apps'] = [...item['apps'], user]
-            console.log("create App", item)
-            this.service.saveUpdatedChild(item).subscribe({
-              next: (response) => {
-                console.log(response);
-              }
-            })
-          }
-        })
+      next: (users) => {
+        const appAlreadyExists = users.some(user =>
+          user?.apps?.some(app => app.name === appName)
+        );
 
-        //  this.router.navigate(['home']);
-        this.message.add({ severity: 'success', detail: 'App created Successfully', life: 3000 })
+        if (appAlreadyExists) {
+          this.message.add({
+            severity: 'warn',
+            detail: 'App is already registered',
+            life: 3000
+          });
+          return;
+        }
+
+        const user = {
+          name: appName,
+          url: this.imageUrl,
+          website: this.createApp?.controls['website'].value,
+          usertype: this.addType,
+          hour: '',
+          enabled: false,
+          usedTime: Date
+        };
+
+        this.service.onCreateUser(user).subscribe({
+          next: (response) => {
+            this.router.navigate(['home'])
+            console.log(response)
+          }
+        });
+
+        users.forEach(item => {
+          if (item.usertype === 'child') {
+            item['apps'] = [...item['apps'], user];
+            this.service.saveUpdatedChild(item).subscribe({
+              next: (response) => console.log(response)
+            });
+          }
+        });
+
+        this.message.add({
+          severity: 'success',
+          detail: 'App created successfully',
+          life: 3000
+        });
       },
       error: () => {
-        this.message.add({ severity: 'error', detail: 'Server error', life: 3000 });
+        this.message.add({
+          severity: 'error',
+          detail: 'Server error',
+          life: 3000
+        });
       }
-    })
+    });
   }
+
 
   onCreateChild() {
     if (this.createChild.invalid) {
@@ -82,28 +105,57 @@ export class FormComponent{
       return;
     }
 
-  //  console.log(this.createChild)
+    console.log("create Child")
 
-    let user = {
-      name: this.createChild.controls['name'].value,
-      dateOfBirth: this.createChild.controls['dateOfBirth'].value,
-      username: this.createChild.controls['username'].value,
-      password: this.createChild.controls['password'].value,
-      usertype: this.addType,
-      apps: [],
-      isPanelCollapsed: true
-    };
+    // Extract input values once
+    const newName = this.createChild.controls['name'].value.trim().toLowerCase();
+    const newUsername = this.createChild.controls['username'].value.trim().toLowerCase();
 
-    this.service.onCreateUser(user).subscribe({
-      next: (response) => {
-        this.router.navigate(['home']);
-        this.message.add({ severity: 'success', detail: 'App created Successfully', life: 3000 });
+    this.service.onGetUsers().subscribe({
+      next: response => {
+        const appsList = response.filter(u => u.usertype === 'app');
+        const existingChildren = response.filter(u => u.usertype === 'child');
+
+        const nameExists = existingChildren.some(u => u.name?.trim().toLowerCase() === newName);
+        const usernameExists = existingChildren.some(u => u.username?.trim().toLowerCase() === newUsername);
+
+        if (nameExists || usernameExists) {
+          this.message.add({
+            severity: 'warn',
+            detail: nameExists
+              ? 'A child with this name already exists'
+              : 'Username is already taken',
+            life: 3000
+          });
+          return;
+        }
+
+        const user = {
+          name: this.createChild.controls['name'].value,
+          dateOfBirth: this.createChild.controls['dateOfBirth'].value,
+          username: this.createChild.controls['username'].value,
+          password: this.createChild.controls['password'].value,
+          usertype: this.addType,
+          apps: [...appsList],
+          isPanelCollapsed: true
+        };
+
+        this.service.onCreateUser(user).subscribe({
+          next: () => {
+            this.router.navigate(['home']);
+            this.message.add({ severity: 'success', detail: 'Child Added Successfully', life: 3000 });
+          },
+          error: () => {
+            this.message.add({ severity: 'error', detail: 'Server error', life: 3000 });
+          }
+        });
       },
       error: () => {
-        this.message.add({ severity: 'error', detail: 'Server error', life: 3000 });
+        this.message.add({ severity: 'error', detail: 'Failed to fetch users', life: 3000 });
       }
     });
   }
+
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
@@ -121,8 +173,4 @@ export class FormComponent{
     this.addType = "";
     this.router.navigate(['home']);
   }
-
-
-  
-
 }

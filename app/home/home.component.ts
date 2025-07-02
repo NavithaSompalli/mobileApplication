@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   recordedChildList: object[] = [];
   initialLoading: boolean = true;
 
-  
+
   constructor(private service: ServiceService, private message: MessageService, private router: Router) { }
 
   ngOnInit(): void {
@@ -63,8 +63,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['form'])
   }
 
-  onPanelToggle(panelId: string, tab: string) {
-    this.permissionAppsList = this.childsList.filter(item => item.usertype === 'app')
+  onPanelToggle(obj) {
+    this.service.saveUpdatedChild(obj).subscribe({
+      next: response => {
+        this.handleChildAndAppList();
+      }
+    });
   }
 
   onSelectedTab(value: string) {
@@ -78,6 +82,8 @@ export class HomeComponent implements OnInit {
       if (!child["apps"]) {
         child["apps"] = [];
       }
+
+      console.log(child);
       this.service.saveUpdatedChild(child).subscribe({
         next: response => {
           this.handleChildAndAppList();
@@ -90,11 +96,58 @@ export class HomeComponent implements OnInit {
     this.isToggleActive = !this.isToggleActive
   }
 
-  onLogout(){
+  onLogout() {
     localStorage.clear();
     this.router.navigate(['']);
   }
 
-    
+  onDelete(id: string): void {
+  this.service.onDeleteUser(id).subscribe({
+    next: () => {
+      // Step 1: Delete the app
+      this.message.add({
+        severity: 'success',
+        detail: 'App deleted successfully',
+        life: 3000
+      });
+
+      // Step 2: Fetch all users and update affected child records
+      this.service.onGetUsers().subscribe({
+        next: (users) => {
+          users.forEach(child => {
+            if (child.usertype === 'child' && Array.isArray(child.apps)) {
+              const updatedApps = child.apps.filter(app => app.id !== id);
+              
+              if (updatedApps.length !== child.apps.length) {
+                const updatedChild = { ...child, apps: updatedApps };
+                this.service.saveUpdatedChild(updatedChild).subscribe({
+                  next: () => console.log(`Updated child ${child.id}`),
+                  error: err => console.error('Child update failed:', err)
+                });
+              }
+            }
+          });
+        },
+        error: () => {
+          this.message.add({
+            severity: 'error',
+            detail: 'Failed to update child apps',
+            life: 3000
+          });
+        }
+      });
+
+      // Step 3: Refresh local data/view
+      this.handleChildAndAppList();
+    },
+    error: () => {
+      this.message.add({
+        severity: 'error',
+        detail: 'Delete failed',
+        life: 3000
+      });
+    }
+  });
+}
 
 }

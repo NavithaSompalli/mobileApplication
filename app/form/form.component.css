@@ -5,7 +5,6 @@
     align-items: center;
     height: 100vh;
     background-size: cover;
-    border:1px solid #000;
 }
 
 ::ng-deep .p-button-outlined.p-button-secondary {
@@ -14,12 +13,11 @@
     color: #498fad;
 }
 
-:host ::ng-deep .app-form-container  {
+:host ::ng-deep .app-form-container {
     width: '25rem';
     overflow: 'hidden';
-    background-color: #000;
     background-image: 'linear-gradient(#54afd6,#ffffff, #ffffff,#ffffff,#54afd6)' !important;
-    height:100vh !important;
+    height: 100vh !important;
 }
 
 .p-button-elements {
@@ -127,12 +125,20 @@
     border-radius: 5%;
 }
 
+.fa-solid,
+.fas {
+    font-weight: 900;
+    font-size: 25px;
+    color: #fff;
+}
+
 .child-card-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    height: 90vh;
+    height: 86vh;
+    margin: 5px;
 }
 
 .form-container1 {
@@ -178,7 +184,7 @@ input {
 .buttons-container2 {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
 ::ng-deep .p-card {
@@ -200,7 +206,7 @@ input {
 }
 
 ::ng-deep .p-card-body {
-    padding: 5px !important;
+    padding: 0px !important;
 }
 
 .app-permission {
@@ -266,10 +272,27 @@ td {
     font-family: "Roboto";
 }
 
+.back-icon-container {
+    cursor: pointer;
+    background-color: steelblue;
+      padding: 10px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      color: #fff;
+      font-family: "Roboto";
+      padding-top: 15px;
+      padding-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+}
+
 
 @media (max-width:576px) {
     ::ng-deep .form-card-container .p-card {
-        width: '19rem' !important;
+       width: 19rem !important;
+        height: 97vh !important;
         overflow: 'hidden' !important;
         background-image: 'linear-gradient(#54afd6,#ffffff, #ffffff,#ffffff)' !important;
     }
@@ -283,6 +306,6 @@ td {
         width: 99% 531.625px;
         padding: 10px;
         margin: 10px;
-        
+
     }
 }

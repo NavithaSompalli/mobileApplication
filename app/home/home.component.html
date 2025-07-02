@@ -14,13 +14,19 @@
                 <i class="fa-solid fa-power-off" [ngStyle]="{'font-size':'28px','cursor':'pointer'}"></i>
             </p>
         </nav>
-        <div class="main-content-container" *ngIf = "tabType !== 'report'">
+       
+        <div class="main-content-container" *ngIf="tabType !== 'report'">
             <div class="tabs-content-container">
                 <ng-container *ngFor="let item of filteredList; let i = index">
-                    <img [src]="item?.url" class="logo" *ngIf="item?.usertype === 'app'" />
+                    <div [ngStyle]="{'display':'inline'}">
+                        <img [src]="item?.url" class="logo" *ngIf="item?.usertype === 'app'" (click)="op.toggle($event)" />
+                        <p-popover #op>
+                            <button type="button" (click)="onDelete(item.id)" class="popover-btn">Uninstall</button>
+                        </p-popover>
+                    </div>    
                     <div class="child-content-parent-container" *ngIf="item?.usertype !== 'app'">
                         <div class="items-container">
-                            <p class="items"><strong>{{ item?.name }}</strong></p>
+                            <p class="items header-element"><strong>{{ item?.name }}</strong><i class="fa-solid fa-trash-arrow-up" (click)="onDelete(item.id)"></i></p>
                             <hr />
                             <p class="items"><strong>Date Of Birth &nbsp;:</strong> <span>&nbsp;&nbsp;{{
                                     item?.dateOfBirth
@@ -30,11 +36,11 @@
                             </p>
                             <p class="items"><strong>Password &nbsp; :</strong> <span>&nbsp;&nbsp;{{ item?.password
                                     }}</span></p>
-                            <div class="card flex justify-center" *ngIf="permissionAppsList?.length !== undefined">
+                            <div class="card flex justify-center">
                                 <p-panel header="App Permission" [toggleable]="true"
                                     [(collapsed)]="item.isPanelCollapsed"
                                     [ngStyle]="{'overflow-y':'auto', 'display':'flex', 'gap':'10px', 'width':'25rem'}"
-                                    (collapsedChange)="onPanelToggle(item.id, 'appPermission')">
+                                    (collapsedChange)="onPanelToggle(item)">
                                     <ng-container>
                                         <table style="width:100%; border-collapse: collapse;">
                                             <thead>
@@ -79,10 +85,6 @@
         <p-button label="+" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
             [ngStyle]="{'border': '1px solid #498fad', 'border-radius':'50%'}" class="p-button-elements"
             (click)="onSelectUserType('app')" *ngIf="tabType=== 'app'" />
-
         <app-graph *ngIf="tabType === 'report'"></app-graph>
-           
     </p-card>
 </div>
-
- 

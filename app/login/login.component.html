@@ -1,9 +1,9 @@
 <div class="card-containerlogin">
-    <p-card [style]="{ width: '25rem', overflow: 'hidden'}" *ngIf="userType === ''">
+    <p-card  class="login-card" *ngIf="userType === ''">
         <ng-template #header>
-            <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" [ngStyle]="{'height':'60vh'}"/>
+            <img alt="Card" class="w-full" src="https://www.camsinfotech.com/wp-content/uploads/2019/01/9-mobile.jpg" [ngStyle]="{'height':'75vh'}"/>
         </ng-template>
-        <p [ngStyle]="{'margin':'10px'}"> Family App Permission </p>
+        <p [ngStyle]="{'margin':'10px','font-weight':'bold', 'font-size':'20px'}"> Family App Permission </p>
       
         <p [ngStyle]="{'margin':'10px'}">
             Manage What your child can access and control in the app 
@@ -21,8 +21,9 @@
     </p-card>
     <p-card
         [style]="{ 
-        width: '25rem', 
+        width: '23rem', 
         overflow: 'hidden', 
+        height:'96vh',
         backgroundImage: 'linear-gradient(#54afd6,#ffffff, #ffffff,#ffffff)', display:'flex', justifyContent:'flex-end' }"
         *ngIf="userType !== ''" class="parent-login">
         <h1 class="parent-login-heading">Parent-Child App Permissions</h1>

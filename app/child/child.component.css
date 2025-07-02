@@ -10,12 +10,14 @@
 
 .child-app1 {
   border-radius: 10px;
-  background-color: #498fad;
   width: 23rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   height: 95vh;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
 }
 
 .avatar,
@@ -32,7 +34,6 @@
 }
 
 .time-circle {
-  background: #3a86ff;
   color: #fff;
   width: 60px;
   height: 60px;
@@ -47,6 +48,18 @@
   opacity: 0.7;
   filter: grayscale(30%);
 }
+
+:host ::ng-deep .app-card .p-card {
+  background-color: #f0f4f8 !important;
+  border-radius: 10px !important;
+}
+
+:host ::ng-deep .app-card .p-card-body {
+  height: 100%;
+  background-color: #f0f4f8 !important;
+  border-radius: 10px !important;
+}
+
 
 .app-icon {
   font-size: 32px;
@@ -94,18 +107,25 @@
 }
 
 @keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   margin: 10px;
   overflow-y: auto;
-  height: 60vh;
+  /* height: 100vh; */
   scrollbar-width: none;
 }
 
@@ -113,10 +133,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: burlywood;
+  background: steelblue;
   border-radius: 10px 10px 0 0;
   padding: 5px;
   width: 23rem;
+  color: #fff;
+  font-size: 10px;
+}
+
+.fa-solid,
+.fas {
+  font-weight: 900;
+  font-size: 30px;
 }
 
 .footer {
@@ -125,6 +153,7 @@
 
 /* 📱 Small screens (mobile) */
 @media (max-width: 576px) {
+
   .child-app,
   .child-app1,
   .align-items-center,
@@ -133,17 +162,18 @@
   }
 
   .child-app {
-  border-radius: 10px;
-  margin: 30px auto 5px;
-  background-color: transparent;
-  width: 19rem;
-  display: block;
-  margin:5px;
-}
-.child-app1{
-  height:97vh;
-  margin-top: 5px;
-}
+    border-radius: 10px;
+    margin: 30px auto 5px;
+    background-color: transparent;
+    width: 19rem;
+    display: block;
+    margin: 5px;
+  }
+
+  .child-app1 {
+    height: 97vh;
+    margin-top: 5px;
+  }
 
   .avatar,
   .image-app-logo {

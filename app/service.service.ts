@@ -45,12 +45,19 @@ export class ServiceService {
   }
 
   saveUpdatedChild(obj: any): Observable<any> {
-    return this.http.patch<any>(`${this.baseUrl}/${obj.id}`, obj).pipe(catchError(this.handleError));
+    return this.http.put<any>(`${this.baseUrl}/${obj.id}`, obj).pipe(catchError(this.handleError));
   }
 
   private handleError(error: any) {
     return throwError(() => new Error(error.message || 'Server error'));
   }
+
+  onDeleteUser(id: string): Observable<any> {
+  return this.http.delete<any>(`http://localhost:3000/users/${id}`).pipe(
+    catchError(this.handleError)
+  );
+}
+
 
 
   loggin(){

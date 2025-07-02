@@ -1,38 +1,37 @@
-.card{
-    width:21rem;
-    height: 300px;
-    box-shadow: 2px 2px 2px 2px #f0e7e7;
-    margin:10px;
-}
-
-:host ::ng-deep .custom-chart canvas{
-     width: 100% !important;
-  height: 300px !important;
-}
-
-canvas{
-    display: block;
-    box-sizing: border-box;
-    height: 300px;
-    width: 336px;
-}
-
-.p-chart{
-   height: 50%;
-}
-
-:host ::ng-deep .activity-container .p-panel{
-    width: 23rem !important;
-    height: 411px !important;
-    overflow: auto !important;
-}
-
 .card {
+  width: 23rem;
+  height: 320px;
+  margin: 10px 0 1.5rem;
   padding: 1rem;
   background-color: #fff;
   border-radius: 0.75rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* fixed alpha value */
+}
+
+:host ::ng-deep .custom-chart canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+canvas {
+  display: block;
+  box-sizing: border-box;
+  height: 300px;
+  width: 100%;
+}
+
+.p-chart {
+  height: 50%;
+}
+
+:host ::ng-deep .activity-container .p-panel {
+  width: 23rem !important;
+  height: 400px !important;
+  overflow: auto !important;
+}
+
+:host ::ng-deep .activity-container .p-panel-header{
+    padding:0px !important;
 }
 
 .custom-chart {
@@ -47,15 +46,15 @@ p:first-of-type {
   margin-bottom: 0.75rem;
 }
 
-
-
 /* Individual child user block */
 .child-info {
-  background-color: #f9f9f9;
+  background-color: #f0f4f8;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
-  border-left: 4px solid #42a5f5;
+  border-left: 10px solid #42a5f5;
   border-radius: 0.5rem;
+  font-family: "Roboto", sans-serif;
+  margin-top: 10px;
 }
 
 /* Optional app image container */
@@ -64,16 +63,50 @@ p:first-of-type {
   height: 40px;
   object-fit: cover;
   margin: 0.5rem;
-  border-radius: 0.25rem;
   border: 1px solid #ddd;
   border-radius: 50%;
 }
 
+.apps-image {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  justify-content: space-between;
+  align-items: center;
+}
 
-.apps-image{
-    display: flex;
-    flex-direction: row;
-    gap:5px;
-    justify-content: space-between;
-    align-items: center;
+/* Responsive styles */
+@media (max-width: 576px) {
+  :host ::ng-deep .custom-chart canvas {
+    width: 100% !important;
+    height: 230px !important;
+  }
+
+  .card {
+    width: 18rem;
+    height: 240px;
+  }
+
+ :host ::ng-deep .activity-container .p-panel {
+        width: 19rem !important;
+        height: 220px !important;
+        overflow: auto !important;
+    }
+
+p:first-of-type {
+    font-weight: bold;
+    font-size: 15px; 
+    margin-bottom: 0px; 
+}
+
+.child-info {
+    background-color: #f9f9f9;
+    padding: 5px;
+    margin-bottom: 1rem;
+    border-left: 10px solid #42a5f5;
+    border-radius: 0.5rem;
+    font-family: "Roboto";
+    font-size: 15px;
+}
+
 }

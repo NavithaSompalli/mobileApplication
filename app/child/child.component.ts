@@ -29,6 +29,8 @@ export class ChildComponent implements OnInit, OnDestroy {
       this.service.userData$.subscribe(data => {
         this.userList = data;
         this.apps = this.userList?.apps || [];
+        console.log(this.apps);
+        this.apps = this.apps.filter(obj => obj.enabled);
       })
     );
 
@@ -39,13 +41,13 @@ export class ChildComponent implements OnInit, OnDestroy {
         if (this.destroyedTimes.length >= 2) {
           const time1 = this.destroyedTimes[this.destroyedTimes.length - 1];
           const time2 = this.destroyedTimes[this.destroyedTimes.length - 2];
-
           const diffMs = time1.getTime() - time2.getTime();
+          console.log(diffMs)
           const diffSeconds = Math.floor(diffMs / 1000);
           const diffMinutes = Math.floor(diffSeconds / 60);
-          const diffHours = Math.floor(diffMinutes / 60);
-          this.usedTime = diffHours * 60 + diffMinutes
-          console.log('usedTime', this.usedTime);
+         // const diffHours = Math.floor(diffMinutes / 60);
+          this.usedTime = diffMinutes;
+          //console.log('usedTime', this.usedTime);
           // this.usedTime =  `${diffHours}h ${diffMinutes % 60}m ${diffSeconds % 60}s`;
           // console.log(
           //   `Time difference: ${diffHours}h ${diffMinutes % 60}m ${diffSeconds % 60}s`

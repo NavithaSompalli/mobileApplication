@@ -23,8 +23,8 @@
   height: 300px;
   width: 23rem;
   border-radius: 50%;
-  margin-left:5%;
-  margin-top:20px;
+  margin-left: 5%;
+  margin-top: 20px;
   margin-bottom: 20px;
 }
 
@@ -48,7 +48,7 @@
   justify-content: flex-end;
   align-items: center;
   gap: 15px;
-  height: 35vh;
+  height: 43vh;
   width: 100%;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
   border-top-left-radius: 30px;
@@ -76,6 +76,12 @@
   border-radius: 20px;
 }
 
+:host ::ng-deep .login-card .p-card {
+  width: 23rem !important;
+  overflow: 'hidden' !important;
+  height: '96vh' !important;
+}
+
 input {
   height: 40px;
   width: 100%;
@@ -92,7 +98,7 @@ input {
 }
 
 .w-full {
-    width: 100% !important;
+  width: 100% !important;
 }
 
 @media (max-width:678px) {
@@ -103,16 +109,20 @@ input {
     align-items: center;
     height: 100vh;
     width: 100%;
-    margin: 10%;
   }
 
   input {
-  padding:10px;
-  width: 100%;
-  margin: 5px;
-  border-radius: 20px;
-  
-}
+    padding: 10px;
+    width: 100%;
+    margin: 5px;
+    border-radius: 20px;
+  }
 
+  :host ::ng-deep .login-card .p-card {
+    width: 20rem !important;
+    overflow: 'hidden' !important;
+    height: '90vh' !important;
+    margin: 10px !important;
+  }
 
 }

@@ -12,20 +12,20 @@
     </div>
 
     <!-- App Cards -->
-    <div class="grid app-grid mb-5">
+    <div class="grid">
       <div class="col-6" *ngFor="let app of apps; let index = index">
         <p-card
           *ngIf="app?.enabled"
           [class.disabled]="app.disabled"
           class="app-card"
         >
-          <div class="app-icon" (click)="onPlay(app, app.website, index)">
+          <button class="app-icon" (click)="onPlay(app, app.website, index)">
             <img
               [src]="app?.url"
               alt="App Icon"
               class="image-app-logo"
             />
-          </div>
+          </button>
           <h3
             *ngIf="app['name']"
             [ngStyle]="{ 'text-align': 'center' }"
@@ -43,9 +43,7 @@
             ></button>
           </a>
           -->
-         
         </p-card>
-
       </div>
     </div>
   </div>
