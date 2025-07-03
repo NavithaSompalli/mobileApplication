@@ -10,28 +10,28 @@ import { ServiceService } from '../service.service'; // Custom service for login
    styleUrl: './login.component.css',
    standalone: false
 })
-export class LoginComponent implements OnInit{
-   userType: string = "";        // Stores selected user type ('parent' or 'child')
-   username: string = "";        // Stores the entered username
-   password: string = "";        // Stores the entered password
-   visible: boolean = false;     // May control visibility of a password input or modal
+export class LoginComponent implements OnInit {
+   userType: string = ""; // Stores selected user type ('parent' or 'child')
+   username: string = ""; // Stores the entered username
+   password: string = ""; // Stores the entered password
+   visible: boolean = false; // May control visibility of a password input or modal
 
    constructor(
-      private router: Router,                 // For navigation between routes
-      private message: MessageService,       // To show messages (toasts)
-      private service: ServiceService        // Service for authentication and user data management
+      private router: Router, // For navigation between routes
+      private message: MessageService, // To show messages (toasts)
+      private service: ServiceService   // Service for authentication and user data management
    ) { }
 
    // Called when user selects a user type from a dropdown or similar control
    onSelectUserType(value: string) {
       this.userType = value;
-      console.log(this.userType); // For debugging
+      // console.log(this.userType);
    }
 
-   ngOnInit(){
-      if( localStorage.getItem('userType') === 'parent'){
+   ngOnInit() {
+      if (localStorage.getItem('userType') === 'parent') {
          this.router.navigate(['home'])
-      }else if(localStorage.getItem('userType') === 'child'){
+      } else if (localStorage.getItem('userType') === 'child') {
          this.router.navigate(['child']);
       }
    }
@@ -72,15 +72,15 @@ export class LoginComponent implements OnInit{
                   localStorage.setItem('authToken', 'true'); // Save auth flag
                   localStorage.setItem('userType', 'parent');
                   this.router.navigate(['home']);            // Navigate to parent home page
-                  this.service.updateUser(users);            // Possibly update shared user state
+                  // this.service.updateUser(users);            // Possibly update shared user state
                }
                // If a child logs in successfully
                else if (foundUser && this.userType === "child") {
-                  localStorage.setItem('authToken', 'true');
+                  localStorage.setItem('authToken', 'true'); // Store authToken if the user is loggedin
                   localStorage.setItem('userId', foundUser.id); // Store child's ID separately
                   localStorage.setItem('userType', 'child');
-                  console.log(foundUser.id);                   // Debugging log
-                  this.service.updateUser(foundUser);          // Update state with single user
+                  // console.log(foundUser.id);                   
+                //  this.service.updateUser(foundUser);          // Update state with single user
                   this.router.navigate(['child']);             // Navigate to child's view
                }
                // No match found: invalid credentials
@@ -93,9 +93,10 @@ export class LoginComponent implements OnInit{
                this.message.add({ severity: 'error', detail: 'Server error', life: 3000 });
             }
          });
-      } else {
-         // If user type wasn't selected, prompt the user
-         this.message.add({ severity: 'warn', detail: 'Please select a valid user type', life: 3000 });
       }
+   }
+
+   onGoBack(){
+      this.userType = '';
    }
 }

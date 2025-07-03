@@ -26,6 +26,7 @@
         height:'96vh',
         backgroundImage: 'linear-gradient(#54afd6,#ffffff, #ffffff,#ffffff)', display:'flex', justifyContent:'flex-end' }"
         *ngIf="userType !== ''" class="parent-login">
+        <i class="fa-solid fa-arrow-left login-left-arrow" (click)="onGoBack()"></i>
         <h1 class="parent-login-heading">Parent-Child App Permissions</h1>
         <img src="https://static.vecteezy.com/system/resources/previews/003/689/231/original/online-registration-or-sign-up-login-for-account-on-smartphone-app-user-interface-with-secure-password-mobile-application-for-ui-web-banner-access-cartoon-people-illustration-vector.jpg"
             class="loginpage-iamge" />
@@ -42,24 +43,5 @@
         <p-toast [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'"
             [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'" />
     </div>
-
-    <!-- <p-card [style]="{ width: '25rem', overflow: 'hidden' }" *ngIf="userType === 'child'">
-        <ng-template #icon>  <i class="fa-solid fa-arrow-left"></i></ng-template>
-        <ng-template #header>
-            <img alt="Card" class="w-full" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-        </ng-template>
-        <ng-template #title>Child </ng-template>
-        <ng-template #subtitle> Child app management </ng-template>
-        <p>
-            Welcome to TutorLock. Please select user type... Lorem ipsum dolor amet, consectetur, adipiscing elit.
-        </p>
-        <ng-template #footer>
-            <div class="flex gap-4 buttons-container">
-                <p-button label="Parent" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
-                    class="p-button-elements" (click)="onSelectUserType('parent')" />
-                <p-button label="Child" severity="secondary" class="w-full" [outlined]="true" styleClass="w-full"
-                    class="p-button-elements" (click)="onSelectUserType('child')" />
-            </div>
-        </ng-template>
-    </p-card>
-</div> -->
+</div>
+    

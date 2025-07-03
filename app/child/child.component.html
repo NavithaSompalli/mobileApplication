@@ -4,7 +4,7 @@
     <div class="header flex justify-between mb-4 align-items-center">
       <div class="profile flex align-items-center gap-3">
         <div class="avatar">👦</div>
-        <h1 class="m-0">Hi, {{ userList?.name }}</h1> <!-- Safe access -->
+        <h1 class="m-0">Hi, {{ userObject?.name }}</h1>
       </div>
       <div class="time-circle" (click)="onLogout()">
         <i class="fa-solid fa-power-off"></i>
@@ -14,40 +14,32 @@
     <!-- App Cards -->
     <div class="grid">
       <div class="col-6" *ngFor="let app of apps; let index = index">
-        <p-card
-          *ngIf="app?.enabled"
-          [class.disabled]="app.disabled"
-          class="app-card"
-        >
-          <button class="app-icon" (click)="onPlay(app, app.website, index)">
-            <img
-              [src]="app?.url"
-              alt="App Icon"
-              class="image-app-logo"
-            />
+        <p-card *ngIf="app?.enabled" [class.disabled]="app.hour && app.hour > 0 && app.usedTime >= app.hour * 60"
+          class="app-card">
+          <button class="app-icon" [disabled]="app.hour && app.hour > 0 && app.usedTime >= app.hour*60"
+            (click)="onPlay(app, app.website, index)">
+            <img [src]="app?.url" alt="{{ app.name }} Icon" class="image-app-logo" />
           </button>
-          <h3
-            *ngIf="app['name']"
-            [ngStyle]="{ 'text-align': 'center' }"
-          >
+          <h3 *ngIf="app?.name" class="text-center">
             {{ app.name }}
           </h3>
 
-          <!-- Optional: Uncomment this block if you want a button instead of clickable icons
-          <a [href]="app.website" target="_blank">
-            <button
-              pButton
-              label="{{ app.disabled ? 'TIME UP!' : 'Play' }}"
-              [disabled]="app.disabled"
-              class="play-button mt-2"
-            ></button>
+          <!-- Optional button version -->
+          <!--
+          <a 
+            *ngIf="app.website" 
+            [href]="app.website" 
+            target="_blank">
+            <button 
+              pButton 
+              [label]="app.usedTime >= app.hour ? 'TIME UP!' : 'Play'" 
+              [disabled]="app.usedTime >= app.hour" 
+              class="play-button mt-2">
+            </button>
           </a>
           -->
         </p-card>
       </div>
     </div>
   </div>
-  
 </div>
-
-

@@ -51,7 +51,7 @@
                 <span *ngIf="websites.invalid && websites.touched" class="error-text">Website Name is
                     required</span>
                 <label for="uploadFile" class="custom-upload-btn">
-                    Upload Image
+                    {{uploadLabel}}
                 </label>
                 <input type="file" id="uploadFile" (change)="onFileSelected($event)" accept="image/png, image/jpeg"
                     hidden name="image" required />

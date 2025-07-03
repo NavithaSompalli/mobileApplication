@@ -1,9 +1,11 @@
 <div class="home-card-container">
     <p-card class="panel-bg-container">
         <div class="sidebar-container" *ngIf="isToggleActive">
-            <p-button type="button" (click)="onSelectedTab('app')" class="tabs-btn">Apps</p-button>
-            <p-button type="button" (click)="onSelectedTab('child')" class="tabs-btn">Childs</p-button>
-            <p-button type="button" (click)="onSelectedTab('report')" class="tabs-btn">Report</p-button>
+            <i class="fa-solid fa-circle-xmark" (click) = 'isToggleActive = false'></i>
+            <p-button type="button" (click)="onSelectedTab('app')"  [ngClass]="tabType === 'app' ? 'active-tab' : 'tabs-btn'"
+>Apps</p-button>
+            <p-button type="button" (click)="onSelectedTab('child')"  [ngClass]="tabType === 'child'? 'active-tab':'tabs-btn'">Childs</p-button>
+            <p-button type="button" (click)="onSelectedTab('report')"  [ngClass]="tabType === 'report'?'active-tab': 'tabs-btn'">Report</p-button>
         </div>
         <nav class="nav-container">
             <p>
@@ -14,7 +16,7 @@
                 <i class="fa-solid fa-power-off" [ngStyle]="{'font-size':'28px','cursor':'pointer'}"></i>
             </p>
         </nav>
-       
+        <!--<p class="tab-heading">{{tabType| titlecase}}s</p>-->
         <div class="main-content-container" *ngIf="tabType !== 'report'">
             <div class="tabs-content-container">
                 <ng-container *ngFor="let item of filteredList; let i = index">
@@ -40,7 +42,7 @@
                                 <p-panel header="App Permission" [toggleable]="true"
                                     [(collapsed)]="item.isPanelCollapsed"
                                     [ngStyle]="{'overflow-y':'auto', 'display':'flex', 'gap':'10px', 'width':'25rem'}"
-                                    (collapsedChange)="onPanelToggle(item)">
+                                    (collapsedChange)="onAppToggleChange(item)">
                                     <ng-container>
                                         <table style="width:100%; border-collapse: collapse;">
                                             <thead>
@@ -66,7 +68,7 @@
                                                     </td>
                                                     <td>
                                                         <p-toggleswitch [(ngModel)]="obj.enabled"
-                                                            (onChange)="onAppToggleChange(obj, item)" />
+                                                            (onChange)="onAppToggleChange(item)" />
                                                     </td>
                                                 </tr>
                                             </tbody>

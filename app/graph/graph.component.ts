@@ -9,48 +9,49 @@ import { ServiceService } from '../service.service';
     standalone: false
 })
 export class GraphComponent implements OnInit {
-    data: any;
-    options: any;
-    graphUserList: object[] = [];
-    platformId = inject(PLATFORM_ID);
-    usersList = [];
+    data: any; // Stores chart data
+    options: any; // Stores chart configuration options
+    graphUserList: object[] = []; // Stores the full list of users from the service
+    platformId = inject(PLATFORM_ID); // Injects the current platform ID (browser/server)
+    usersList = []; // Filtered list of users who are of type 'child'
 
     constructor(private cd: ChangeDetectorRef, private service: ServiceService) { }
 
     ngOnInit() {
+        // Fetch users from the service
         this.service.onGetUsers().subscribe({
             next: (response) => {
                 this.graphUserList = response;
-                this.usersList = this.graphUserList.filter(item => item['usertype'] === 'child')
+                // Filter the list to only include users of type 'child'
+                this.usersList = this.graphUserList.filter(item => item['usertype'] === 'child');
+                // For each child user, calculate total hours set and total usage time
                 this.usersList.forEach(value => {
                     let totalHours = 0;
                     let totalUsedTime = 0;
+                    // Loop through the apps used by the child
                     value["apps"].forEach(item => {
                         if (item['hour'] !== undefined) {
                             totalHours = totalHours + Number(item['hour']);
-                           // console.log(typeof item['hour'])
+                            // console.log(typeof item['hour'])
                         }
 
                         if (item['usedTime'] !== undefined) {
-                            totalUsedTime = totalUsedTime + item['usedTime'];
-                           // console.log(totalUsedTime);
+                            totalUsedTime = totalUsedTime + item['usedTime']; // Add actual usage time (in minutes)
+                            // console.log(totalUsedTime);
                         }
                     });
+                    // Store calculated totals back in the user object
                     value["totalHours"] = totalHours;
                     value["totalUsedTime"] = totalUsedTime;
-                   // console.log("total", value['totalUsedTime'])
-                   // console.log(this.usersList);
+                    // console.log("total", value['totalUsedTime'])
+                    // console.log(this.usersList);
                 });
                 this.initChart(); // Move inside callback to ensure chart initializes after data fetch
-            },
-            error: (err) => {
-               // console.error('Failed to fetch users:', err);
             }
         });
-
-
     }
 
+    // Method to initialize chart data and styling options
     initChart() {
         if (isPlatformBrowser(this.platformId)) {
             const documentStyle = getComputedStyle(document.documentElement);
@@ -59,7 +60,7 @@ export class GraphComponent implements OnInit {
             const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
 
             this.data = {
-                labels: this.usersList.map(user => user.name || 'Unnamed'),
+                labels: this.usersList.map(user => user.name || 'Unnamed'), // Prepare chart data
                 datasets: [
                     {
                         label: 'Total Used Time (Minutes)',
@@ -68,16 +69,14 @@ export class GraphComponent implements OnInit {
                         backgroundColor: documentStyle.getPropertyValue('--p-cyan-300'),
                         yAxisID: 'y',
                         tension: 0.4,
-                        data: this.usersList.map(user =>
-                            user.totalUsedTime < 60
-                                ? user.totalUsedTime
-                                : +(user.totalUsedTime / 60).toFixed(2)
-                        )
+                        data: this.usersList.map(user => user.totalUsedTime || 0)
+
                         // Decimal hours
                     }
                 ]
             };
 
+            // Configure chart appearance and behavior
             this.options = {
                 stacked: false,
                 maintainAspectRatio: false,
@@ -112,6 +111,7 @@ export class GraphComponent implements OnInit {
                 }
             };
 
+            // Trigger change detection manually since async code has updated bindings
             this.cd.markForCheck();
         }
     }

@@ -47,7 +47,7 @@
       position: absolute;
       z-index: 2;
       flex: 0 0 220px;
-      background: linear-gradient(#54afd6, #8fc0cc);
+      background: #598ebc;
       color: white;
       padding: 16px;
       box-sizing: border-box;
@@ -69,6 +69,12 @@
       padding: 0 !important;
   }
 
+  .fa-circle-xmark{
+    font-size:25px;
+    margin-left:90%;
+    position: relative;
+  }
+
   ::ng-deep .tabs-content-container {
       overflow-y: auto;
       height: 86vh;
@@ -76,8 +82,12 @@
       font-family: "Roboto";
   }
 
-  ::ng-deep .tabs-btn .p-button {
+  ::ng-deep .tabs-btn {
       font-size: 20px;
+      background-color: #82c4f0;
+      border-radius: 10px;
+      text-align: center;
+      margin-top:10px;
   }
 
   .logo {
@@ -190,7 +200,7 @@
       position: relative;
       left: 80%;
       margin: 10px;
-      bottom: 20%;
+      bottom: 10%;
   }
 
   .app-logo-wrapper {
@@ -221,6 +231,20 @@
 .popover-btn{
     background-color: transparent;
     border: none;
+}
+
+.active-tab{
+    background-color: #8fc0cc;
+    padding: 5px;
+    border-radius: 10px;
+    text-align: center;
+    margin-top:10px;
+}
+
+.tab-heading{
+    font-size: 20px;
+    font-weight: bold;
+    margin:5px;
 }
 
 :host ::ng-deep .p-popover-content {
