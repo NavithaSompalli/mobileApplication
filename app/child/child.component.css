@@ -52,6 +52,7 @@
 :host ::ng-deep .app-card .p-card {
   background-color: #f0f4f8 !important;
   border-radius: 10px !important;
+  cursor: pointer;
 }
 
 :host ::ng-deep .app-card .p-card-body {
@@ -68,8 +69,6 @@
   flex-direction: column !important;
 }
 
-
-
 .app-icon {
   font-size: 32px;
   margin-bottom: 10px;
@@ -77,6 +76,7 @@
   justify-content: center;
   background-color: transparent;
   border: none;
+  cursor: pointer;
 }
 
 .progress-container {
@@ -157,6 +157,7 @@
 .fas {
   font-weight: 900;
   font-size: 30px;
+  cursor: pointer;
 }
 
 .footer {

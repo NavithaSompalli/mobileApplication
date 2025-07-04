@@ -3,7 +3,11 @@
     <!-- Header -->
     <div class="header flex justify-between mb-4 align-items-center">
       <div class="profile flex align-items-center gap-3">
-        <div class="avatar">👦</div>
+        <div class="avatar" (click)="op.toggle($event)">👦
+          <p-popover #op>
+            <button type="button" class="popover-btn" >Time Spent on Each App</button>
+          </p-popover>
+        </div>
         <h1 class="m-0">Hi, {{ userObject?.name }}</h1>
       </div>
       <div class="time-circle" (click)="onLogout()">
@@ -13,11 +17,13 @@
 
     <!-- App Cards -->
     <div class="grid">
+      <div *ngIf="apps.length === 0">
+        <h1 [ngStyle]="{'text-align':'center'}">Child's App Store is currently empty.</h1>
+      </div>
       <div class="col-6" *ngFor="let app of apps; let index = index">
         <p-card *ngIf="app?.enabled" [class.disabled]="app.hour && app.hour > 0 && app.usedTime >= app.hour * 60"
-          class="app-card">
-          <button class="app-icon" [disabled]="app.hour && app.hour > 0 && app.usedTime >= app.hour*60"
-            (click)="onPlay(app, app.website, index)">
+          class="app-card" (click)="onPlay(app, app.website, index)">
+          <button class="app-icon" [disabled]="app.hour && app.hour > 0 && app.usedTime >= app.hour*60">
             <img [src]="app?.url" alt="{{ app.name }} Icon" class="image-app-logo" />
           </button>
           <h3 *ngIf="app?.name" class="text-center">

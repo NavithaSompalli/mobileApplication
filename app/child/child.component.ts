@@ -66,6 +66,11 @@ export class ChildComponent implements OnInit {
   }
 
 
+  onTimeSpentOnEachApp(){
+    this.router.navigate(['graph']);
+  }
+
+
   // Method triggered when the user chooses to app
   onPlay(app: any, url: string, index: number): void {
 

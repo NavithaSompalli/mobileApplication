@@ -27,7 +27,7 @@ canvas {
 
 :host ::ng-deep .activity-container .p-panel {
   width: 23rem !important;
-  height: 400px !important;
+  height: 515px !important;
   overflow: auto !important;
 }
 

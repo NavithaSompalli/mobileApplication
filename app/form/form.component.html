@@ -11,14 +11,12 @@
                     required #names="ngModel" />
                 <span *ngIf="names.invalid && names.touched" class="error-text"> Name is
                     required</span>
-                <input type="text" pInputText [(ngModel)]="dob" variant="filled" name="dateOfBirth"
-                    placeholder="Date Of Birth" required #dobs="ngModel" />
+                <p-datepicker [(ngModel)]="dob" [showIcon]="true" inputId="buttondisplay" [showOnFocus]="false" #dobs="ngModel" name="dateOfBirth" placeholder="Date Of Birth" [maxDate]="today"/>
                 <span *ngIf="dobs.invalid && dobs.touched" class="error-text">Date Of Birth is
                     required</span>
-                <input type="text" pInputText [(ngModel)]="username" variant="filled" name="username"
+                <input type="text" email pInputText [(ngModel)]="username" variant="filled" name="username"
                     placeholder="Username" required #usernames="ngModel" />
-                <span *ngIf="usernames.invalid && usernames.touched" class="error-text">Username is
-                    required</span>
+                <span *ngIf="usernames.invalid && usernames.touched" class="error-text">Username must be email Id</span>
                 <input type="text" pInputText [(ngModel)]="password" variant="filled" name="password"
                     placeholder="Password" required #passwords="ngModel" />
                 <span *ngIf="passwords.invalid && passwords.touched" class="error-text">Password Name is

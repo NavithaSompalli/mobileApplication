@@ -76,6 +76,35 @@
     height: 40px;
 }
 
+:host ::ng-deep .p-datepicker {
+    position: relative;
+    display: inline-flex;
+    width: 100% !important;
+}
+
+:host ::ng-deep .p-datepicker:has(.p-datepicker-dropdown) .p-datepicker-input {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+:host ::ng-deep .p-datepicker-dropdown{
+    border-start-end-radius: 20px !important;
+    border-end-end-radius: 20px !important;
+}
+
+:host ::ng-deep .p-datepicker-weekday-cell {
+    text-align: center !important;
+}
+
+:host ::ng-deep .p-toast-message-content {
+    display: flex;
+    align-items: center;
+    padding: var(--p-toast-content-padding);
+    gap: var(--p-toast-content-gap);
+}
+
 ::ng-deep .p-button-elementschild .p-button-label {
     font-size: 1.2rem;
     color: #498fad;

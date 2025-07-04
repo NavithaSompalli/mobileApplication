@@ -32,9 +32,9 @@
             class="loginpage-iamge" />
         <form class="form-container" (ngSubmit)="onSubmitLogin()" #login="ngForm">
             <h1>Login</h1>
-            <input type="text" pInputText [(ngModel)]="username" variant="filled" name="emailId" placeholder="Username" />
+            <input type="text" pInputText [(ngModel)]="username" variant="filled" name="emailId" placeholder="Username" #usernames="ngModel"/>
             <input type="text" pInputText [(ngModel)]="password" variant="filled" name="passwords"
-                placeholder="Password" />
+                placeholder="Password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$"/>
             <p-button type="submit" label="Login" class="login-btn" />
         </form>
     </p-card>

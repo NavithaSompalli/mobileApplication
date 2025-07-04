@@ -27,6 +27,7 @@ export class FormComponent {
   addType: string; // Stores type of user ('app' or 'child')
   appAndUsersList: any[] = []; // Stores a combined list of apps and users from the service
   uploadLabel: string = 'Upload Image';
+  today: Date = new Date();
 
   constructor(private service: ServiceService, private message: MessageService, private router: Router) { }
 
@@ -57,7 +58,7 @@ export class FormComponent {
       this.service.onGetUsers().subscribe({
         next: (users) => {
           const appAlreadyExists = users.some(user =>
-            user?.apps?.some(app => app.name === appName.trim.toLowerCase())
+            user?.apps?.some(app => app.name === appName)
           );
           // Show warning if app is already registered
           if (appAlreadyExists) {
@@ -84,12 +85,12 @@ export class FormComponent {
           // Save the new app to the jsonserver
           this.service.onCreateUser(user).subscribe({
             next: (response) => {
-              this.router.navigate(['home']); // Redirect to home after creation
               this.message.add({
                 severity: 'success',
                 detail: 'App created successfully',
                 life: 3000
               });
+              this.router.navigate(['home']); // Redirect to home after creation
             }
           });
 
@@ -122,6 +123,7 @@ export class FormComponent {
       return;
     }
 
+    console.log(this.createChild);
     // Extract input values once
     const newName = this.createChild.controls['name'].value.trim().toLowerCase();
     const newUsername = this.createChild.controls['username'].value.trim().toLowerCase();

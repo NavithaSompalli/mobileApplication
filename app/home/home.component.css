@@ -69,10 +69,11 @@
       padding: 0 !important;
   }
 
-  .fa-circle-xmark{
-    font-size:25px;
-    margin-left:90%;
-    position: relative;
+  .fa-circle-xmark {
+      font-size: 25px;
+      margin-left: 90%;
+      position: relative;
+      cursor: pointer;
   }
 
   ::ng-deep .tabs-content-container {
@@ -87,7 +88,8 @@
       background-color: #82c4f0;
       border-radius: 10px;
       text-align: center;
-      margin-top:10px;
+      margin-top: 10px;
+      cursor: pointer;
   }
 
   .logo {
@@ -95,6 +97,7 @@
       width: 40px;
       margin: 10px;
       border-radius: 50%;
+      cursor: pointer;
   }
 
   .child-content-parent-container {
@@ -124,9 +127,10 @@
       align-items: center;
   }
 
-  .fa-trash-arrow-up{
-    color: steelblue;
-    font-size:18px;
+  .fa-trash-arrow-up {
+      color: steelblue;
+      font-size: 18px;
+      cursor: pointer;
   }
 
   ::ng-deep .panel-info .p-panel {
@@ -204,62 +208,64 @@
   }
 
   .app-logo-wrapper {
-  position: relative;
-  display: inline-block;
-}
+      position: relative;
+      display: inline-block;
+  }
 
-.uninstall-popup {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1px solid #ccc;
-  padding: 4px 8px;
-  border-radius: 4px;
-  z-index: 10;
-}
+  .uninstall-popup {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid #ccc;
+      padding: 4px 8px;
+      border-radius: 4px;
+      z-index: 10;
+  }
 
-.uninstall-popup button {
-  background-color: #e53935;
-  color: white;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
-  cursor: pointer;
-}
+  .uninstall-popup button {
+      background-color: #e53935;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+  }
 
-.popover-btn{
-    background-color: transparent;
-    border: none;
-}
+  .popover-btn {
+      background-color: transparent;
+      border: none;
+  }
 
-.active-tab{
-    background-color: #8fc0cc;
-    padding: 5px;
-    border-radius: 10px;
-    text-align: center;
-    margin-top:10px;
-}
+  .active-tab {
+      background-color: #8fc0cc;
+      padding: 5px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+  }
 
-.tab-heading{
-    font-size: 20px;
-    font-weight: bold;
-    margin:5px;
-}
+  .tab-heading {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 5px;
+  }
 
-:host ::ng-deep .p-popover-content {
-    padding: var(--p-popover-content-padding);
-    background-color: #6daad3 !important;
-    border-radius: 5px !important;
-    font-family: 'Roboto' !important;
-}
+  :host ::ng-deep .p-popover-content {
+      padding: var(--p-popover-content-padding);
+      background-color: #6daad3 !important;
+      border-radius: 5px !important;
+      font-family: 'Roboto' !important;
+  }
 
-.popover-btn {
-    background-color: transparent;
-    border: none;
-    color: #000 !important;
-    font-weight: bold !important;
-}
+  .popover-btn {
+      background-color: transparent;
+      border: none;
+      color: #000 !important;
+      font-weight: bold !important;
+      cursor: pointer;
+  }
 
 
   @media (max-width:576px) {

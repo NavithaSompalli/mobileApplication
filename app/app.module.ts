@@ -36,6 +36,7 @@ import { MinutesToHoursPipe } from './minutes-to-hours.pipe';
 import { PopoverModule } from 'primeng/popover';
 import { NotFoundComponent } from './not-found/not-found.component';
 
+
 // Routers link array 
  const routes: Routes = [
   {path:'', component:LoginComponent},
@@ -43,7 +44,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
   {path:'child', component: ChildComponent,canActivate:[AuthGuard]},
   {path:'video/:id', component: FooterComponent,canActivate:[AuthGuard]},
   {path:'form', component:FormComponent,canActivate:[AuthGuard]},
-  {path:'**', component:NotFoundComponent, canActivate:[AuthGuard]}
+  {path:'**', component:NotFoundComponent, canActivate:[AuthGuard]},
+  {path:'graph', component:GraphComponent}
  ]
 
 @NgModule({

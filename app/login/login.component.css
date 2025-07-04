@@ -108,6 +108,14 @@ input {
   color:#ffffff;
   margin:8px;
   cursor: pointer;
+  top: 15px;
+}
+
+:host ::ng-deep .p-toast-message-content {
+    display: flex;
+    align-items: center;
+    padding: var(--p-toast-content-padding);
+    gap: var(--p-toast-content-gap);
 }
 
 @media (max-width:678px) {

@@ -8,7 +8,6 @@
         <div *ngFor="let item of usersList">
             <div *ngIf="item['usertype'] === 'child'" class="child-info">
                 <p>{{item["name"]}}</p>
-                <p>Total Hours: {{item['totalHours']}}</p>
                 <!--<p>Total Used Time : {{+(item['totalUsedTime']/60).toFixed(2)}}</p>-->
                 <p>Total Used Time: {{ item['totalUsedTime'] | minutesToHours }}</p>
                 <ng-container *ngIf="item['totalHours'] !== 0">
