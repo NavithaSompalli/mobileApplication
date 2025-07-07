@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild,Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FileUpload } from 'primeng/fileupload';
 import { ServiceService } from '../service.service';
@@ -33,11 +33,13 @@ export class HomeComponent implements OnInit {
   filteredList: any[] = []; // Filtered list based on selected tab type
   tabType: string = "app"; // Current tab selected in UI 
 
+  
+
   constructor(private service: ServiceService, private message: MessageService, private router: Router) { }
 
   ngOnInit(): void {
     this.handleChildAndAppList() // Load data initially
-    this.tabType = this.service.addType; // Set the current tab based on shared service
+    this.tabType = this.service.addType;
   }
 
   // Fetch all users and filter based on selected user type (app/child)
@@ -56,12 +58,12 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['form'])
   }
 
-  // Called when tab is switched to update filtered list accordingly
-  onSelectedTab(value: string) {
-    this.tabType = value;
+  onSelectedTab(user){
+    this.tabType = user;
     this.handleChildAndAppList();
-    this.isToggleActive = false;
   }
+
+ 
 
   // Handle toggle changes for enabling/disabling apps
   onAppToggleChange(child: any) {
@@ -72,17 +74,7 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  // Toggle button state 
-  onToggleButton() {
-    this.isToggleActive = !this.isToggleActive
-  }
-
-  // Clear local storage and log out the user
-  onLogout() {
-    localStorage.clear();
-    this.router.navigate(['']);
-  }
-
+ 
   // Handle app deletion and remove it from any child’s app list
   onDelete(id: string): void {
     this.service.onDeleteUser(id).subscribe({

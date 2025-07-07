@@ -237,14 +237,6 @@
       border: none;
   }
 
-  .active-tab {
-      background-color: #8fc0cc;
-      padding: 5px;
-      border-radius: 10px;
-      text-align: center;
-      margin-top: 10px;
-      cursor: pointer;
-  }
 
   .tab-heading {
       font-size: 20px;

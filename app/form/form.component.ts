@@ -33,11 +33,6 @@ export class FormComponent {
 
   ngOnInit() {
     this.addType = this.service.addType // Set type of user
-    // // Subscribe to a shared Observable to get list of apps and users
-    // this.service.userData$.subscribe((user) => {
-    //   this.appAndUsersList = user;
-    //   console.log(this.appAndUsersList)
-    // })
   }
 
   // Handle logic to create a new app
@@ -60,10 +55,11 @@ export class FormComponent {
           const appAlreadyExists = users.some(user =>
             user?.apps?.some(app => app.name === appName)
           );
+        
           // Show warning if app is already registered
           if (appAlreadyExists) {
             this.message.add({
-              severity: 'warn',
+              severity: 'error',
               detail: 'App is already registered',
               life: 3000
             });
@@ -185,7 +181,7 @@ export class FormComponent {
       reader.onload = () => {
         this.imageUrl = reader.result as string;
         // Ensure this is inside the onload function
-        this.uploadLabel = `${this.Appname} logo got uploaded`;
+        this.uploadLabel = file.name;
       };
       reader.readAsDataURL(file);
     }

@@ -105,6 +105,10 @@
     gap: var(--p-toast-content-gap);
 }
 
+:host ::ng-deep .p-toast-close-button{
+  margin:0px !important;
+}
+
 ::ng-deep .p-button-elementschild .p-button-label {
     font-size: 1.2rem;
     color: #498fad;

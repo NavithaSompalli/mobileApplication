@@ -1,37 +1,39 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, ActivatedRouteSnapshot } from '@angular/router';
 import { ServiceService } from './service.service';
-import { ActivatedRouteSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private authService: ServiceService, private router: Router) { }
+  constructor(private authService: ServiceService, private router: Router) {}
 
   canActivate(route: ActivatedRouteSnapshot): boolean {
-    const isLoggedIn = this.authService.loggin(); // this function will get the user authToken
-    const userType = localStorage.getItem('userType'); // retrieving the user type
-    const requestedRoute = route.routeConfig?.path; // Extract the path string from the route configuration
+    const isLoggedIn = this.authService.loggin(); // Check if user is authenticated
+    const userType = localStorage.getItem('userType'); // 'child' or 'parent'
+    const requestedRoute = route.routeConfig?.path; // e.g., 'home', 'video/:id', etc.
+    console.log(requestedRoute);
+
     if (!isLoggedIn) {
-      this.router.navigate(['']);
+      this.router.navigate(['']); // Redirect to login
       return false;
     }
 
-    // If the user is a child, block access to "home" and "form"
-    if (isLoggedIn && userType === 'child' && (requestedRoute === 'home' || requestedRoute === 'form')) {
-      this.router.navigate(['child']); // redirect child user to their allowed route
+    // Define allowed routes for each user type
+    const childRoutes = ['child','video/:id', 'graph'];
+    const parentRoutes = ['home', 'form'];
+
+    if (userType === 'child' && !childRoutes.includes(requestedRoute || '')) {
+      this.router.navigate(['child']);
       return false;
     }
 
-    if (isLoggedIn && userType === 'parent' && (requestedRoute === 'video' || requestedRoute === 'child')) {
-      this.router.navigate(['home']); // redirect child user to their allowed route
+    if (userType === 'parent' && !parentRoutes.includes(requestedRoute || '')) {
+      this.router.navigate(['home']);
       return false;
     }
 
-    // Allow all other valid routes
-    return true;
+    return true; // Allow access
   }
-
 }

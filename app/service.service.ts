@@ -9,12 +9,8 @@ import { catchError } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class ServiceService {
   private baseUrl = 'http://localhost:3000/users';
-  addType: string = 'app';
-  // private userDataSource = new BehaviorSubject<any>(null);
-  // userData$ = this.userDataSource.asObservable();
-  // updateUser(data: any) {
-  //   this.userDataSource.next(data);
-  // }
+  addType: string = !localStorage.getItem("userId")? 'app': 'childs';
+  
   private handleError(error: any) {
     return throwError(() => new Error(error.message || 'Server error'));
   }

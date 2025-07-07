@@ -1,9 +1,12 @@
-<div class="card">
+<div class="card" *ngIf="!userId">
     <p-chart type="line" [data]="data" [options]="options" class="h-[25rem] custom-chart canvas" />
 </div>
-<p>Activity History</p>
+<div class="card" *ngIf="userId">
+    <p-chart type="bar" [data]="data" [options]="options" class="h-[25rem] custom-chart canvas" />
+</div>
+<p class="activity-history-heading">Activity History</p>
 
-<p-panel class="activity-container">
+<p-panel class="activity-container" *ngIf="!userId">
     <ng-container *ngIf="usersList.length !== 0">
         <div *ngFor="let item of usersList">
             <div *ngIf="item['usertype'] === 'child'" class="child-info">
@@ -23,15 +26,23 @@
                     </div>
                 </ng-container>
             </div>
-            <!-- <div class="card flex justify-center">
-                <p-panel header="Header" [toggleable]="true" >
-                   <ng-container *ngFor="let value of item['apps']"> 
-                    <div>
-                        <img [src]="value.url"/> 
-                    </div>
-                   </ng-container>
-                </p-panel>
-            </div> -->
+        </div>
+    </ng-container>
+</p-panel>
+
+<p-panel class="activity-container" *ngIf="userId">
+    <ng-container *ngIf="labelsList.length === 0">
+        <h1>No Apps History</h1>
+    </ng-container>
+    <ng-container *ngIf="labelsList.length !== 0">
+        <div *ngFor="let item of usersList['apps']">
+            <div class="child-info" *ngIf="item['enabled']">
+                <div class="apps-image">
+                    <img [src]="item.url" class="app-img" />
+                    <p>{{item['name']}}</p>
+                    <p>⏱️{{item['usedTime'] = item['usedTime'] || 0 | minutesToHours }}</p>
+                </div>
+            </div>
         </div>
     </ng-container>
 </p-panel>

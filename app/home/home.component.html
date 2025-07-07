@@ -1,24 +1,12 @@
 <div class="home-card-container">
     <p-card class="panel-bg-container">
-        <div class="sidebar-container" *ngIf="isToggleActive">
-            <i class="fa-solid fa-circle-xmark" (click) = 'isToggleActive = false'></i>
-            <p-button type="button" (click)="onSelectedTab('app')"  [ngClass]="tabType === 'app' ? 'active-tab' : 'tabs-btn'"
->Apps</p-button>
-            <p-button type="button" (click)="onSelectedTab('child')"  [ngClass]="tabType === 'child'? 'active-tab':'tabs-btn'">Childs</p-button>
-            <p-button type="button" (click)="onSelectedTab('report')"  [ngClass]="tabType === 'report'?'active-tab': 'tabs-btn'">Report</p-button>
-        </div>
-        <nav class="nav-container">
-            <p>
-                <i class="fa-solid fa-bars" [ngStyle]="{'font-size':'28px','cursor':'pointer'}"
-                    (click)="onToggleButton()"></i>
-            </p>
-            <p (click)="onLogout()">
-                <i class="fa-solid fa-power-off" [ngStyle]="{'font-size':'28px','cursor':'pointer'}"></i>
-            </p>
-        </nav>
+       <app-header (tabTypeEvent) = "onSelectedTab($event)"></app-header>
         <!--<p class="tab-heading">{{tabType| titlecase}}s</p>-->
         <div class="main-content-container" *ngIf="tabType !== 'report'">
             <div class="tabs-content-container">
+                <ng-container *ngIf="filteredList.length === 0">
+                    <h1 class="text-center">{{tabType | titlecase}} Store is currently empty</h1>
+                </ng-container>
                 <ng-container *ngFor="let item of filteredList; let i = index">
                     <div [ngStyle]="{'display':'inline'}">
                         <img [src]="item?.url" class="logo" *ngIf="item?.usertype === 'app'" (click)="op.toggle($event)" />
@@ -31,7 +19,7 @@
                             <p class="items header-element"><strong>{{ item?.name }}</strong><i class="fa-solid fa-trash-arrow-up" (click)="onDelete(item.id)"></i></p>
                             <hr />
                             <p class="items"><strong>Date Of Birth &nbsp;:</strong> <span>&nbsp;&nbsp;{{
-                                    item?.dateOfBirth
+                                    item?.dateOfBirth | date
                                     }}</span></p>
                             <p class="items"><strong>Username &nbsp;:</strong> <span>&nbsp;&nbsp;{{ item?.username
                                     }}</span>

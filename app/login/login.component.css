@@ -118,6 +118,17 @@ input {
     gap: var(--p-toast-content-gap);
 }
 
+.error-text{
+  color:red;
+}
+
+.p-button{
+  cursor: pointer;
+}
+
+:host ::ng-deep .p-toast-close-button{
+  margin:0px !important;
+}
 @media (max-width:678px) {
   .card-container {
     display: flex;

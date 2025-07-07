@@ -1,0 +1,37 @@
+<ng-container *ngIf="!userId">
+    <div class="sidebar-container" *ngIf="isToggleActive">
+        <i class="fa-solid fa-circle-xmark" (click)='isToggleActive = false'></i>
+        <p-button type="button" (click)="onSelectedTab('app')"
+            [ngClass]="tabType === 'app' ? 'active-tab' : 'tabs-btn'">Apps</p-button>
+        <p-button type="button" (click)="onSelectedTab('child')"
+            [ngClass]="tabType === 'child'? 'active-tab':'tabs-btn'">Childs</p-button>
+        <p-button type="button" (click)="onSelectedTab('report')"
+            [ngClass]="tabType === 'report'?'active-tab': 'tabs-btn'">Report</p-button>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="userId">
+    <div class="sidebar-container" *ngIf="isToggleActive">
+        <i class="fa-solid fa-circle-xmark" (click)="isToggleActive = false"></i>
+
+        <p-button type="button" routerLink="/child" routerLinkActive="active-tab"
+            [routerLinkActiveOptions]="{ exact: true }" class="tabs-btn">
+            Child
+        </p-button>
+
+        <p-button type="button" routerLink="/graph" routerLinkActive="active-tab"
+            [routerLinkActiveOptions]="{ exact: true }" class="tabs-btn">
+            Report
+        </p-button>
+    </div>
+</ng-container>
+
+
+<nav class="nav-container">
+    <p>
+        <i class="fa-solid fa-bars" [ngStyle]="{'font-size':'28px','cursor':'pointer'}" (click)="onToggleButton()"></i>
+    </p>
+    <p (click)="onLogout()">
+        <i class="fa-solid fa-power-off" [ngStyle]="{'font-size':'28px','cursor':'pointer'}"></i>
+    </p>
+</nav>

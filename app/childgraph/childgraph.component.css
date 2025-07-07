@@ -1,0 +1,90 @@
+.child-app {
+  border-radius: 10px;
+  margin: 30px auto 5px;
+  background-color: transparent;
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.child-app1 {
+  border-radius: 10px;
+  width: 23rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 95vh;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+}
+
+.avatar,
+.image-app-logo {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #d4e3ff;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid #3a86ff;
+  cursor: pointer;
+}
+
+
+.time-circle {
+  color: #fff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.align-items-center {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: steelblue;
+  border-radius: 10px 10px 0 0;
+  padding: 5px;
+  width: 23rem;
+  color: #fff;
+  font-size: 10px;
+}
+
+.fa-solid,
+.fas {
+  font-weight: 900;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.card {
+    width: 23rem;
+    height: 320px;
+    margin: 0px; 
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.mb-4{
+    margin-bottom: 0px !important;
+}
+
+:host ::ng-deep .p-card-body{
+    padding: 0px !important;
+}
+
+.activity-container .p-panel {
+    width: 23rem !important;
+    height: 484px !important;
+    overflow: auto !important;
+}

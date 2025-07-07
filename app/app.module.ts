@@ -28,31 +28,26 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { ChartModule } from 'primeng/chart';
 
 import { ChildComponent } from './child/child.component';
-import { FooterComponent } from './footer/footer.component';
+import { WebsiteComponent } from './website/website.component';
 import { FormComponent } from './form/form.component';
 import { AuthGuard } from './auth-guard.guard';
 import { GraphComponent } from './graph/graph.component';
 import { MinutesToHoursPipe } from './minutes-to-hours.pipe';
 import { PopoverModule } from 'primeng/popover';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { ChildgraphComponent } from './childgraph/childgraph.component';
+import { HeaderComponent } from './header/header.component';
+
+import { AppRoutingModule } from './app.routes';
 
 
-// Routers link array 
- const routes: Routes = [
-  {path:'', component:LoginComponent},
-  {path:'home', component: HomeComponent,canActivate:[AuthGuard]},
-  {path:'child', component: ChildComponent,canActivate:[AuthGuard]},
-  {path:'video/:id', component: FooterComponent,canActivate:[AuthGuard]},
-  {path:'form', component:FormComponent,canActivate:[AuthGuard]},
-  {path:'**', component:NotFoundComponent, canActivate:[AuthGuard]},
-  {path:'graph', component:GraphComponent}
- ]
+
 
 @NgModule({
-  declarations: [AppComponent,LoginComponent,HomeComponent,ChildComponent,FooterComponent,FormComponent,GraphComponent,MinutesToHoursPipe],
+  declarations: [AppComponent,LoginComponent,HomeComponent,ChildComponent,WebsiteComponent,FormComponent,GraphComponent,MinutesToHoursPipe, ChildgraphComponent, HeaderComponent],
   bootstrap:[AppComponent],
   imports: [
-    RouterModule.forRoot(routes),
+    AppRoutingModule,
     CommonModule,
     BrowserModule,
     ButtonModule,

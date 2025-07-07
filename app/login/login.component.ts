@@ -60,8 +60,6 @@ export class LoginComponent implements OnInit {
          // Call the login method from the service
          this.service.login(this.username, this.password).subscribe({
             next: (users) => {
-               console.log(users); // For debugging
-
                // Find a matching user in the returned user list
                const foundUser = users.find(user =>
                   user.username === this.username && user.password === this.password

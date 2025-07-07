@@ -11,44 +11,76 @@ import { ServiceService } from '../service.service';
 export class GraphComponent implements OnInit {
     data: any; // Stores chart data
     options: any; // Stores chart configuration options
-    graphUserList: object[] = []; // Stores the full list of users from the service
     platformId = inject(PLATFORM_ID); // Injects the current platform ID (browser/server)
-    usersList = []; // Filtered list of users who are of type 'child'
+    usersList: any = []; // Filtered list of users who are of type 'child'
+    labelsList: object[] = [];
+    usedTimeList: object[] = [];
+    userId: string;
 
     constructor(private cd: ChangeDetectorRef, private service: ServiceService) { }
 
     ngOnInit() {
         // Fetch users from the service
-        this.service.onGetUsers().subscribe({
-            next: (response) => {
-                this.graphUserList = response;
-                // Filter the list to only include users of type 'child'
-                this.usersList = this.graphUserList.filter(item => item['usertype'] === 'child');
-                // For each child user, calculate total hours set and total usage time
-                this.usersList.forEach(value => {
-                    let totalHours = 0;
-                    let totalUsedTime = 0;
-                    // Loop through the apps used by the child
-                    value["apps"].forEach(item => {
-                        if (item['hour'] !== undefined) {
-                            totalHours = totalHours + Number(item['hour']);
-                            // console.log(typeof item['hour'])
-                        }
 
-                        if (item['usedTime'] !== undefined) {
-                            totalUsedTime = totalUsedTime + item['usedTime']; // Add actual usage time (in minutes)
-                            // console.log(totalUsedTime);
-                        }
+        this.userId = localStorage.getItem("userId") // Retriving the userId from the local storage
+        // This will return object based on the userId from the json server.
+        if (this.userId !== null) {
+            this.service.getUserById(this.userId).subscribe({
+                next: (response) => {
+                    this.usersList = response; // Updating the userObject with response 
+                    // Filtering apps based on the enabled property is true
+                    const filteredArray = this.usersList['apps'].filter(app => app.enabled)
+                    console.log(filteredArray);
+                    this.labelsList = filteredArray.map(user => user.name || 'Unnamed');
+                     this.usedTimeList = filteredArray.map(user => {
+                            const totalSeconds = user.usedTime || 0;
+                            const minutes = Math.floor(totalSeconds / 60);
+                            const seconds = totalSeconds % 60;
+                            return minutes;
+                        });
+                    this.initChart();
+                }
+            })
+        } else {
+
+            this.service.onGetUsers().subscribe({
+                next: (response) => {
+                    this.usersList = response;
+                    // Filter the list to only include users of type 'child'
+                    this.usersList = this.usersList.filter(item => item['usertype'] === 'child');
+                    // For each child user, calculate total hours set and total usage time
+                    console.log(this.usersList)
+                    this.usersList.forEach(value => {
+                        let totalHours = 0;
+                        let totalUsedTime = 0;
+                        // Loop through the apps used by the child
+                        value["apps"].forEach(item => {
+                            if (item['hour'] !== undefined) {
+                                totalHours = totalHours + Number(item['hour']);
+                                // console.log(typeof item['hour'])
+                            }
+
+                            if (item['usedTime'] !== undefined) {
+                                totalUsedTime = totalUsedTime + item['usedTime']; // Add actual usage time (in minutes)
+                                // console.log(totalUsedTime);
+                            }
+                        });
+                        // Store calculated totals back in the user object
+                        value["totalHours"] = totalHours;
+                        value["totalUsedTime"] = totalUsedTime;
                     });
-                    // Store calculated totals back in the user object
-                    value["totalHours"] = totalHours;
-                    value["totalUsedTime"] = totalUsedTime;
-                    // console.log("total", value['totalUsedTime'])
-                    // console.log(this.usersList);
-                });
-                this.initChart(); // Move inside callback to ensure chart initializes after data fetch
-            }
-        });
+
+                    this.labelsList = this.usersList.map(user => user.name || 'Unnamed'),
+                        this.usedTimeList = this.usersList.map(user => {
+                            const totalSeconds = user.totalUsedTime || 0;
+                            const minutes = Math.floor(totalSeconds / 60);
+                            const seconds = totalSeconds % 60;
+                            return minutes;
+                        });
+                    this.initChart(); // Move inside callback to ensure chart initializes after data fetch
+                }
+            });
+        }
     }
 
     // Method to initialize chart data and styling options
@@ -60,7 +92,7 @@ export class GraphComponent implements OnInit {
             const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
 
             this.data = {
-                labels: this.usersList.map(user => user.name || 'Unnamed'), // Prepare chart data
+                labels: this.labelsList, // Prepare chart data
                 datasets: [
                     {
                         label: 'Total Used Time (Minutes)',
@@ -69,7 +101,7 @@ export class GraphComponent implements OnInit {
                         backgroundColor: documentStyle.getPropertyValue('--p-cyan-300'),
                         yAxisID: 'y',
                         tension: 0.4,
-                        data: this.usersList.map(user => user.totalUsedTime || 0)
+                        data: this.usedTimeList
 
                         // Decimal hours
                     }

@@ -25,6 +25,12 @@ canvas {
   height: 50%;
 }
 
+.activity-history-heading{
+  font-family: math;
+    font-size: 2rem;
+    margin-left:10px;
+}
+
 :host ::ng-deep .activity-container .p-panel {
   width: 23rem !important;
   height: 515px !important;

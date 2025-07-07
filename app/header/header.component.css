@@ -1,0 +1,156 @@
+  ::ng-deep .nav-container {
+      background-color: steelblue;
+      padding: 10px;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      color: #fff;
+      font-family: "Roboto";
+      padding-top: 15px;
+      padding-bottom: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 23rem;
+  }
+
+  ::ng-deep .main-content-container {
+      display: flex;
+  }
+
+  ::ng-deep .sidebar-container {
+      position: absolute;
+      z-index: 2;
+      flex: 0 0 220px;
+      background: #598ebc;
+      color: white;
+      padding: 16px;
+      box-sizing: border-box;
+      height: 95vh !important;
+      border-bottom-left-radius: 5px;
+      width: 15%;
+      gap: 10px;
+      display: flex;
+      flex-direction: column;
+      border-top-left-radius: 10px;
+      border-bottom-left-radius: 10px;
+  }
+
+  ::ng-deep .p-button {
+      background: none !important;
+      border: none !important;
+      color: inherit !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+  }
+
+  .fa-circle-xmark {
+      font-size: 25px;
+      margin-left: 90%;
+      position: relative;
+      cursor: pointer;
+  }
+
+  ::ng-deep .tabs-content-container {
+      overflow-y: auto;
+      height: 86vh;
+      scrollbar-width: none;
+      font-family: "Roboto";
+  }
+
+  ::ng-deep .tabs-btn {
+      font-size: 20px;
+      background-color: #82c4f0;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+  }
+
+  .logo {
+      height: 40px;
+      width: 40px;
+      margin: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+  }
+
+  .active-tab {
+      background-color: #8fc0cc;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 10px;
+      cursor: pointer;
+      font-size: 20px;
+  }
+
+  .header-element {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+  }
+
+  .fa-trash-arrow-up {
+      color: steelblue;
+      font-size: 18px;
+      cursor: pointer;
+  }
+
+
+
+
+
+
+
+
+  .app-logo-wrapper {
+      position: relative;
+      display: inline-block;
+  }
+
+
+  .popover-btn {
+      background-color: transparent;
+      border: none;
+  }
+
+  
+
+  .tab-heading {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 5px;
+  }
+
+
+
+
+  @media (max-width:576px) {
+
+
+      ::ng-deep .sidebar-container {
+          position: absolute;
+          z-index: 2;
+          flex: 0 0 220px;
+          background: linear-gradient(#54afd6, #8fc0cc);
+          color: white;
+          padding: 16px;
+          box-sizing: border-box;
+          height: 100%;
+          border-bottom-left-radius: 5px;
+          width: 50%;
+          gap: 10px;
+          display: flex;
+          flex-direction: column;
+      }
+
+      .main-content-container {
+          display: flex;
+          height: 75vh;
+      }
+
+      .nav-container {
+          padding-top: 5px;
+          padding-bottom: 5px;
+      }
+  }

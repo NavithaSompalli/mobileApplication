@@ -147,10 +147,14 @@
   justify-content: space-between;
   background: steelblue;
   border-radius: 10px 10px 0 0;
-  padding: 5px;
+  padding: 0px;
   width: 23rem;
   color: #fff;
   font-size: 10px;
+}
+
+.mb-4{
+  margin-bottom:0px !important;
 }
 
 .fa-solid,
